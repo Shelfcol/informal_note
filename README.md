@@ -1,1 +1,1 @@
-# informal_note
+some software installation,meeting notes,website address
