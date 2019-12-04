@@ -10,6 +10,7 @@
 	https://blog.csdn.net/sinat_28752257/article/details/79169647
 	https://blog.csdn.net/sinat_28752257/article/details/79169647
 	（但是我的新电脑直接可以用我的sh文件安装）
+	
 3.ros kinect:
 	https://blog.csdn.net/softimite_zifeng/article/details/78632211
         sudo rosdep init: RROR:cannot download default sources list from
@@ -21,6 +22,7 @@
                 sudo apt-get install libappindicator3-1
                 然后在终端输入lantern即可启用，但要在右上角确认是否connected
         然后再sudo rosdep init，再继续后面的操作。最好不要在ros安装一开始就启用lantern，因为其额度有限，最后在sudo rosdep init出错之后再启用
+        
 4.U盘解锁方法：
 	df -h #查看信息，找到 /dev/sdb4       284G  217G   68G   77% /media/xxx/u盘名
 	sudo umount /media/xxx/u盘名 #卸载u盘（不需要拔掉u盘）（此步若不成功，可以直接做下一步）
@@ -94,8 +96,10 @@
 
 11.vs2017安装完后再装2015：
 	只选择通用windows应用开发工具中的windows10 SDK（10.0.10586）
+	
 12.keyshot8.2：
 	 http://www.gfxcamp.com/keyshot-pro-8280/
+	 
 13.imu使用:
 	https://blog.csdn.net/qq_31356389/article/details/79216765
         sudo apt-get install ros-kinetic-xsens-driver
@@ -136,6 +140,7 @@
 	图标在左边和下边切换:
 		gsettings set com.canonical.Unity.Launcher launcher-position Left
                 gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+                
 17.velodyne:
 	https://www.jianshu.com/p/1274c002ef5f
 
