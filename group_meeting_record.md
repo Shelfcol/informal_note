@@ -26,4 +26,9 @@
 2019-12-8
 	github帐号完善，买enterprise的，找王老师拿钱
 	基于多传感器融合做AEB的文章，看看别人的切换机制
-	可能直接决策级别的融合就可以了，也有可能做目标侧面的融合。可能需要去各种场景试一下。
+	可能直接决策级别的融合就可以了，也有可能做目标侧面的融合。可能需要去各种场景试一下
+	买铝型材备着
+	实验室的github
+		邮箱：SJTU_IntelliVLab@163.com
+		密码：sjtu2019sjtu
+		Username:sjtuIntelliVehicleLab
