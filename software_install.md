@@ -143,5 +143,8 @@
                 
 17.velodyne:
 	https://www.jianshu.com/p/1274c002ef5f
-
+18.ubuntu16.04 wifi 连接SJTU：
+	安全：WPA及WPA2企业
+	认证：受保护的EAP（PEAP）
+	不需要CA证书（R）
 
