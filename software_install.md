@@ -153,4 +153,5 @@
 	
 	
 	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
-
+20.yolov3配置：
+	https://blog.csdn.net/qq_36327203/article/details/84305303
