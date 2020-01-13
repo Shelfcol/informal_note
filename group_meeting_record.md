@@ -32,3 +32,9 @@
 		邮箱：SJTU_IntelliVLab@163.com
 		密码：sjtu2019sjtu
 		Username:sjtuIntelliVehicleLab
+
+2020-1-11
+	试试超声波的解析
+	海罗水泥还没签约，很可能最终来做。规划/建图（栅格地图）
+	从一个绿色的点倒车装好后到另一个寻迹的点。起始点距离车60米开始
+	

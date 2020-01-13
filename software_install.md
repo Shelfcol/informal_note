@@ -147,4 +147,10 @@
 	安全：WPA及WPA2企业
 	认证：受保护的EAP（PEAP）
 	不需要CA证书（R）
+19.nvidia 驱动安装
+	nvidia安装：https://blog.csdn.net/xunan003/article/details/81665835
+	cuda，cudnn安装：https://blog.csdn.net/lihe4151021/article/details/90237681，成功
+	
+	
+	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
 
