@@ -143,15 +143,34 @@
                 
 17.velodyne:
 	https://www.jianshu.com/p/1274c002ef5f
+	
 18.ubuntu16.04 wifi 连接SJTU：
 	安全：WPA及WPA2企业
 	认证：受保护的EAP（PEAP）
 	不需要CA证书（R）
+	
 19.nvidia 驱动安装
 	nvidia安装：https://blog.csdn.net/xunan003/article/details/81665835
 	cuda，cudnn安装：https://blog.csdn.net/lihe4151021/article/details/90237681，成功
 	
 	
 	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
+	
 20.yolov3配置：
 	https://blog.csdn.net/qq_36327203/article/details/84305303
+	
+21.tensorflow2.0:
+	https://blog.csdn.net/Taylent/article/details/99604468
+	
+22.可以下载免费视频的网站：https://www.vjshi.com/watch/2867215.html
+
+23.清华大学的交通标志牌数据集：https://cg.cs.tsinghua.edu.cn/dataset/form.html?dataset=tt100k
+
+24.ImportError: /opt/ros/kinetic/lib/python2.7/dist-packages/cv2.so: undefined symbol: PyCObject_Type
+	import sys
+	sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+	import cv2
+	
+25.sublime 不能输入中文：https://www.jianshu.com/p/bf05fb3a4709
+
+26.tensorboard不能显示：https://blog.csdn.net/sinat_40515025/article/details/80793942
