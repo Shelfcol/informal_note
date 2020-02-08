@@ -174,3 +174,8 @@
 25.sublime 不能输入中文：https://www.jianshu.com/p/bf05fb3a4709
 
 26.tensorboard不能显示：https://blog.csdn.net/sinat_40515025/article/details/80793942
+	tensorboard --logdir=/home/gxf/deeplearning/keras_learning/logs  //绝对路径
+
+27.阿里云服务器登陆
+	ssh root@114.55.93.111
+	gxf740297955.
