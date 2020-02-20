@@ -179,3 +179,7 @@
 27.阿里云服务器登陆
 	ssh root@114.55.93.111
 	gxf740297955.
+
+28.qq for linux:
+	https://blog.csdn.net/Beking17113/article/details/102870110?utm_source=distribute.pc_relevant.none-task
+	下载deb文件安装
