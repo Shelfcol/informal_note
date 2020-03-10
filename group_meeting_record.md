@@ -29,9 +29,10 @@
 	可能直接决策级别的融合就可以了，也有可能做目标侧面的融合。可能需要去各种场景试一下
 	买铝型材备着
 	实验室的github
-		邮箱：SJTU_IntelliVLab@163.com
-		密码：sjtu2019sjtu
-		Username:sjtuIntelliVehicleLab
+		邮箱帐号：SJTU_IntelliVLab@163.com
+		邮箱密码：sjtu2019sjtu
+		github Username:sjtuIntelliVehicleLab-Owner
+		github password:sjtu2019sjtu
 
 2020-1-11
 	试试超声波的解析
