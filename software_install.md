@@ -179,7 +179,16 @@
 27.阿里云服务器登陆
 	ssh root@114.55.93.111
 	gxf740297955.
+	
+28.妹子路由器密码：路由器后面的AMIITID  2018AP8568
+	管理者密码：gxf740297955.
 
-28.qq for linux:
+29.qq for linux:
 	https://blog.csdn.net/Beking17113/article/details/102870110?utm_source=distribute.pc_relevant.none-task
 	下载deb文件安装
+	
+30.python版本切换：
+	https://blog.csdn.net/Romance5201314/article/details/81667778
+
+31.jupyter notebook python版本切换：
+	https://blog.csdn.net/sinat_34328764/article/details/83214172
