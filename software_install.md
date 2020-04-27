@@ -192,3 +192,29 @@
 
 31.jupyter notebook python版本切换：
 	https://blog.csdn.net/sinat_34328764/article/details/83214172
+
+32.配置mask-rcnn：
+	https://www.jianshu.com/p/f51339f886fc
+	
+	import sys
+	sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+33.jupyter 转python： jupyter nbconvert --to script xxx.ipynb
+
+34. Could not find a package configuration file provided by "tf2_sensor_msgs"
+  with any of the following names:
+
+    tf2_sensor_msgsConfig.cmake
+    tf2_sensor_msgs-config.cmake
+	 sudo apt-get install ros-kinetic-tf2-sensor-msgs
+
+35.Warning: TF_OLD_DATA ignoring data from the past for frame sonar1_link at time 1.53089e+09 according to authority unknown_publisher
+Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
+         at line 277 in /tmp/binarydeb/ros-kinetic-tf2-0.5.20/src/buffer_core.cpp
+         
+         bag包不能循环播放,只能播放一遍
+
+36.电脑打开只有背景,可以右键
+	重装了gdm,然后将桌面换成了gdm
+	mv /.cache /.cache-NOGOOD
+	sudo reboot
+	然后开机之后unlock那里有个齿轮,选择gdm
