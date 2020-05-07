@@ -155,7 +155,13 @@
 	解决方案:https://unix.stackexchange.com/questions/440840/how-to-unload-kernel-module-nvidia-drm/441811#441811
 			在开机之后不要输入用户名和密码登陆,首先,ctrl+alt+F2,然后sudo su进入管理员模式,再systemctl isolate multi-user.target,modprobe -r nvidia-drm,再systemctl start graphical.target
 	cuda，cudnn安装：https://blog.csdn.net/lihe4151021/article/details/90237681，成功
-	
+	cudnn安装成功:https://blog.csdn.net/caicaiatnbu/article/details/87626491
+	cudnn安装后之后检验的时候bug:error while loading shared libraries: libcudart.so.10.0
+								https://blog.csdn.net/wendygelin/article/details/88528055
+sudo cp /usr/local/cuda-10.0/lib64/libcudart.so.10.0 /usr/local/lib/libcudart.so.10.0 && sudo ldconfig
+sudo cp /usr/local/cuda-10.0/lib64/libcublas.so.10.0 /usr/local/lib/libcublas.so.10.0 && sudo ldconfig
+sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so.10.0 && sudo ldconfig
+
 	
 	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
 	
