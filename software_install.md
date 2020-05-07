@@ -151,6 +151,9 @@
 	
 19.nvidia 驱动安装
 	nvidia安装：https://blog.csdn.net/xunan003/article/details/81665835
+	nvidia卸载后重装问题:ERROR: An NVIDIA kernel module 'nvidia-drm' appears to already be loaded in your kernel. This may be because it is in use (for example, by an X server, a CUDA program, or the NVIDIA Persistence Daemon), but this may also happen if your kernel was configured without support for module unloading. Please be sure to exit any programs that may be using the GPU(s) before attempting to upgrade your driver. If no GPU-based programs are running, you know that your kernel supports module unloading, and you still receive this message, then an error may have occured that has corrupted an NVIDIA kernel module's usage count, for which the simplest remedy is to reboot your computer.
+	解决方案:https://unix.stackexchange.com/questions/440840/how-to-unload-kernel-module-nvidia-drm/441811#441811
+			在开机之后不要输入用户名和密码登陆,首先,ctrl+alt+F2,然后sudo su进入管理员模式,再systemctl isolate multi-user.target,modprobe -r nvidia-drm,再systemctl start graphical.target
 	cuda，cudnn安装：https://blog.csdn.net/lihe4151021/article/details/90237681，成功
 	
 	
@@ -218,3 +221,5 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	mv /.cache /.cache-NOGOOD
 	sudo reboot
 	然后开机之后unlock那里有个齿轮,选择gdm
+
+37.编译ros问题:https://www.pianshen.com/article/7654723641/
