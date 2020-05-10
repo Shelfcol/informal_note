@@ -229,3 +229,13 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	然后开机之后unlock那里有个齿轮,选择gdm
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
+38.pytorch install:https://pytorch.org/get-started/previous-versions/
+
+39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
+			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
+			但是其中有依赖未安装:
+					dpkg: 依赖关系问题使得 deepin-wine32:i386 的配置工作不能继续：
+ 					deepin-wine32:i386 依赖于 libasound2-plugins.
+ 			解决: sudo apt install libasound2-plugins:i386
+	启动百度云:/opt/deepinwine/apps/Deepin-BaiduNetDisk里面的sh文件
+	
