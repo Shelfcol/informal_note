@@ -238,4 +238,12 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
  					deepin-wine32:i386 依赖于 libasound2-plugins.
  			解决: sudo apt install libasound2-plugins:i386
 	启动百度云:/opt/deepinwine/apps/Deepin-BaiduNetDisk里面的sh文件
+
+40.Could not find a package configuration file provided by "costmap_converter"
+  with any of the following names:
+
+    costmap_converterConfig.cmake
+    costmap_converter-config.cmake
+  一。sudo apt-get install ros-kinetic-costmap-converter
+  二。下载这个package，放到catkin_ws/src下面
 	
