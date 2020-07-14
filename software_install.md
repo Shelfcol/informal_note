@@ -239,6 +239,7 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
  			解决: sudo apt install libasound2-plugins:i386
 	启动百度云:/opt/deepinwine/apps/Deepin-BaiduNetDisk里面的sh文件
 
+<<<<<<< HEAD
 40.Could not find a package configuration file provided by "costmap_converter"
   with any of the following names:
 
@@ -247,3 +248,24 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
   一。sudo apt-get install ros-kinetic-costmap-converter
   二。下载这个package，放到catkin_ws/src下面
 	
+
+41.make install
+	make sure build tools and cmake are installed
+	sudo apt install build-essential cmake
+	download and extract sources
+	wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz
+	tar -xf release-1.10.0.tar.gz
+	compile
+	mkdir build
+	cd build
+	cmake ../googletest-release-1.10.0
+	make
+	install
+	DESTDIR=/path/to/install make install
+	(I prefer installing it next to my current project. To install it globally you may use sudo make install instead, but I would not recommend it, since it will be hard to cleanup when you remove or update googletest.)
+	cleanup
+	cd ..
+	rm -rf build googletest-release-1.10.0 release-1.10.0.tar.gz
+
+
+
