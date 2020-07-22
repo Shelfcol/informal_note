@@ -267,5 +267,5 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	cd ..
 	rm -rf build googletest-release-1.10.0 release-1.10.0.tar.gz
 
-
+42.git@github.com: Permission denied (publickey). fatal: Could not read from remote repository的问题解决:https://blog.csdn.net/dotphoenix/article/details/100130424
 
