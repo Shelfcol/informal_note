@@ -239,7 +239,7 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
  			解决: sudo apt install libasound2-plugins:i386
 	启动百度云:/opt/deepinwine/apps/Deepin-BaiduNetDisk里面的sh文件
 
-<<<<<<< HEAD
+
 40.Could not find a package configuration file provided by "costmap_converter"
   with any of the following names:
 
