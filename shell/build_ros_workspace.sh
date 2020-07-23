@@ -1,5 +1,5 @@
-mkdir -p ~/catkin_ws_cartographer_slam/src
-cd ~/catkin_ws_cartographer_slam/src
+mkdir -p ~/catkin_ws_HDmap/src
+cd ~/catkin_ws_HDmap/src
 catkin_init_workspace
-cd ~/catkin_ws_cartographer_slam/
+cd ~/catkin_ws_HDmap/
 catkin_make
