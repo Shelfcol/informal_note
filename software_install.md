@@ -318,3 +318,5 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 46. ubuntu不能输入拼音：
 	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 
+47.doxygen:https://www.jianshu.com/p/4e4ce6d6c666
+	https://blog.csdn.net/czyt1988/article/details/8901191
