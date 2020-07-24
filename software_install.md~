@@ -93,6 +93,18 @@
 10.安装google的cartographer：
 	https://google-cartographer-ros.readthedocs.io/en/latest/demos.html
         巨坑：开始自己装了一个pcl-1.9,就报各自pcl的time_h找不到之类查不到的错误，还有boost，我怀疑是pcl太新，导致与boost等库不兼容，以及与cartographer不兼容，联想到ros里面预装了一个pcl-1.7,所以我就将pcl-1.9卸载，然后再重新按照网址安装cartographer（需要执行所有步骤），就成功，所以不要装其他的pcl，ros自带的就OK
+        https://blog.csdn.net/qq_26482237/article/details/92676267   change ceres-solver location
+
+	Could NOT find Protobuf: Found unsuitable version "2.6.1", but required is
+	  at least "3.0.0" (found
+	  //usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread)
+	Call Stack (most recent call first):
+	  /home/gxf/.local/lib/python2.7/site-packages/cmake/data/share/cmake-3.18/Modules/FindPackageHandleStandardArgs.cmake:456 (_FPHSA_FAILURE_MESSAGE)
+	  /home/gxf/.local/lib/python2.7/site-packages/cmake/data/share/cmake-3.18/Modules/FindProtobuf.cmake:626 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+	  CMakeLists.txt:35 (find_package)
+
+	
+
 
 11.vs2017安装完后再装2015：
 	只选择通用windows应用开发工具中的windows10 SDK（10.0.10586）
@@ -226,6 +238,7 @@ sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so
     tf2_sensor_msgs-config.cmake
 	 sudo apt-get install ros-kinetic-tf2-sensor-msgs
 
+
 35.Warning: TF_OLD_DATA ignoring data from the past for frame sonar1_link at time 1.53089e+09 according to authority unknown_publisher
 Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
          at line 277 in /tmp/binarydeb/ros-kinetic-tf2-0.5.20/src/buffer_core.cpp
@@ -257,6 +270,7 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
     costmap_converter-config.cmake
   一。sudo apt-get install ros-kinetic-costmap-converter
   二。下载这个package，放到catkin_ws/src下面
+  3.cannot find sdl_package:sudo apt-get install libsdl-dev
 	
 
 41.make install
@@ -290,5 +304,17 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 		git submodule sync
 		git submodule update --init --recursive
 		python3 ./tools/build_libtorch.py(this will mkdir build,make sure it is python3!!!!!!!!!!!!!!!!!!!!!!!)
-		
+
+44. install navidation:
+	could not find SDL:sudo apt-get install libsdl-dev
+	could not find SDL_image:sudo apt-get install libsdl-image1.2-dev
+	No package 'orocos-bfl' found:make oroscos-bfl source code
+	/home/gxf/catkin_ws_complex/src/complex_mechanism/joystick_drivers/wiimote/include/wiimote/wiimote_controller.h:52:35: fatal error: cwiid.h: No such file or directory
+		sudo apt-get install libswiid-dev
+	/home/gxf/catkin_ws_complex/src/complex_mechanism/joystick_drivers/spacenav_node/src/spacenav_node.cpp:40:30: fatal error: spnav.h: No such file or directory
+		sudo apt-get install libspnav-dev
+
+45. there is no file  /dev/ttyUSB*:可能是设备或者线坏了
+46. ubuntu不能输入拼音：
+	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 

@@ -1,0 +1,5 @@
+mkdir -p ~/catkin_ws_complex/src
+cd ~/catkin_ws_complex/src
+catkin_init_workspace
+cd ~/catkin_ws_complex/
+catkin_make
