@@ -318,3 +318,30 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 46. ubuntu不能输入拼音：
 	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 
+47.doxygen:https://www.jianshu.com/p/4e4ce6d6c666
+	https://blog.csdn.net/czyt1988/article/details/8901191
+	https://www.ibm.com/developerworks/cn/aix/library/au-learningdoxygen/index.html
+	https://blog.csdn.net/joyjj0218/article/details/49888453?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.compare&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.compare
+	
+	(1)在工程目录的根目录同级处terminal:doxygen -s -g doxyconfig
+	(2)配置文件：
+		DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
+	    PROJECT_NAME = “Hailuo project”，项目名称，多个单词需要使用引号(“”)。
+	    PROJECT_NUMBER = “1.0 beta”，项目版本号。
+	    OUTPUT_DIRECTORY = Doc，输出注释文档的目录，如果为空，表示在当前目录，建议写上表示本工程的有意义的目录名称。
+	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
+	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
+	    FILE_PATTERNS = *.c *.cpp *.h *.hpp，指定各种文件，我们常用为*.cpp *.c *.h，等等。
+	    EXTRACT_PRIVATE = YES，显示类的私有成员变量和函数。
+	    RECURSIVE=YES，生成子目录的注释文件
+	    
+	    
+	    IMAGE_PATH = image_dir，指定图片存放的目录，我们将图片放到当前目录下的image_dir目录中，因为我们的文档会出现测试图片示例。
+	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
+	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
+	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
+
+
+	    
+
+	
