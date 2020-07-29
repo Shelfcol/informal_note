@@ -124,16 +124,6 @@
      	sudo ldonfig
 	https://blog.csdn.net/weixin_41896508/article/details/80795239
 	可能需要下载ippicv20151201,替换opencv-3.0.0/3rdparty/ippicv/downloads/linux-8b449a536a2157bcad08a2b9f266828b下面的压缩包即可
-
-3.b 配置编译opencv (NVIDIA CUDA版本)
-
-opencv最麻烦的地方就是编译是属性的配置，对于不同的需求要配置不同的属性。当使用NVIDIA GPU GeForce 1080ti的时候：
-
-  cmake  CMAKE_BUILD_TYPE=RELEASE  CMAKE_INSTALL_PREFIX=/usr/local INSTALL_PYTHON_EXAMPLES=ON INSTALL_C_EXAMPLES=OFF  OPENCV_EXTRA_MODULES_PATH=/home/gxf/software/opencv_contrib-3.2.0/modules  PYTHON_EXCUTABLE=/usr/bin/python  WITH_CUDA=ON  WITH_CUBLAS=ON  DCUDA_NVCC_FLAGS="-D_FORCE_INLINES"  CUDA_ARCH_BIN="10.0"  CUDA_ARCH_PTX=""  CUDA_FAST_MATH=ON  WITH_TBB=ON  WITH_V4L=ON  WITH_QT=false  WITH_GTK=ON  WITH_OPENGL=ON  BUILD_EXAMPLES=ON ..
-
-	ERROR:CMake Error: Variables are set to NOTFOUND
-		https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound		
-
 	make之后的配置https://www.jianshu.com/p/88ad5441c2ae
 
 
@@ -240,6 +230,7 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
 38.pytorch install:https://pytorch.org/get-started/previous-versions/
+		pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html ,直接安装成功，而且python2.7都能直接诶启动
 
 39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
 			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
@@ -277,18 +268,5 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	cd ..
 	rm -rf build googletest-release-1.10.0 release-1.10.0.tar.gz
 
-42.git@github.com: Permission denied (publickey). fatal: Could not read from remote repository的问题解决:https://blog.csdn.net/dotphoenix/article/details/100130424
 
-43.pytorch install(no anaconda):
-	https://github.com/pytorch/pytorch
-	Some depencies:
-		pip install numpy ninja pyyaml mkl mkl-include setuptools cmake cffi
-		(optional)conda install -c pytorch magma-cuda102  # or [ magma-cuda101 | magma-cuda100 | magma-cuda92 ] depending on your cuda version
-	Get the source code:
-		git clone --recursive https://github.com/pytorch/pytorch(if you find some packages are null,don't worry,just pass it)
-		cd pytorch
-		git submodule sync
-		git submodule update --init --recursive
-		python3 ./tools/build_libtorch.py(this will mkdir build,make sure it is python3!!!!!!!!!!!!!!!!!!!!!!!)
-		
 
