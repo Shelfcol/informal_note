@@ -392,9 +392,19 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     pip37 -V
     
     修改python默认版本
-		将ubuntu默认版本改为python37：
-		sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
-		sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
+    	不要将python默认版本改为python37！！！！！！！！！！！！！！！！！！！！！！！！！不然会出很多问题，终端打不开，不能更新
+    	Ubuntu 16.04 卸载自带 Python3 引发的惨案   https://blog.csdn.net/sinat_38682860/article/details/103276156
+    	# 添加 python37 的软链接
+		sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37
+		# 添加 pip3 的软链接（这样pip3就是python3.7专用的，也可以起名为 pip37，不影响python3.5的pip3）
+		sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
+			
+			
+			
+			
+		!!!!!!!错误：将ubuntu默认版本改为python37：
+		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
+		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
 		
 		
 		python2.X修改为python3.X
@@ -423,4 +433,6 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	ModuleNotFoundError: No module named '_ctypes' 解决记录
 		https://www.cnblogs.com/abeen/p/9355389.html
 	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
+
+48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
 	  
