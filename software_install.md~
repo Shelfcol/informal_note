@@ -253,6 +253,7 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
 38.pytorch install:https://pytorch.org/get-started/previous-versions/
+		ImportError: No module named machinery
 
 39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
 			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
@@ -304,6 +305,22 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 		git submodule sync
 		git submodule update --init --recursive
 		python3 ./tools/build_libtorch.py(this will mkdir build,make sure it is python3!!!!!!!!!!!!!!!!!!!!!!!)
+	FAILED: ../torch/csrc/autograd/generated/Functions.cpp ../torch/csrc/jit/generated/generated_unboxing_wrappers_0.cpp ../torch/csrc/jit/generated/generated_unboxing_wrappers_1.cpp ../torch/csrc/jit/generated/generated_unboxing_wrappers_2.cpp ../torch/csrc/autograd/generated/VariableType_0.cpp ../torch/csrc/autograd/generated/VariableType_1.cpp ../torch/csrc/autograd/generated/VariableType_2.cpp ../torch/csrc/autograd/generated/VariableType_3.cpp ../torch/csrc/autograd/generated/VariableType_4.cpp ../torch/csrc/autograd/generated/ProfiledType_0.cpp ../torch/csrc/autograd/generated/ProfiledType_1.cpp ../torch/csrc/autograd/generated/ProfiledType_2.cpp ../torch/csrc/autograd/generated/ProfiledType_3.cpp ../torch/csrc/autograd/generated/ProfiledType_4.cpp ../torch/csrc/autograd/generated/TraceType_0.cpp ../torch/csrc/autograd/generated/TraceType_1.cpp ../torch/csrc/autograd/generated/TraceType_2.cpp ../torch/csrc/autograd/generated/TraceType_3.cpp ../torch/csrc/autograd/generated/TraceType_4.cpp ../torch/csrc/autograd/generated/Functions.h ../torch/csrc/autograd/generated/variable_factories.h ../torch/csrc/autograd/generated/VariableType.h ../torch/csrc/autograd/generated/python_functions.cpp ../torch/csrc/autograd/generated/python_variable_methods.cpp ../torch/csrc/autograd/generated/python_torch_functions.cpp ../torch/csrc/autograd/generated/python_nn_functions.cpp ../torch/csrc/autograd/generated/python_functions.h ../torch/testing/_internal/generated/annotated_fn_args.py 
+cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_code.py --declarations-path /home/gxf/software/pytorch/build/aten/src/ATen/Declarations.yaml --nn-path aten/src   --force_schema_registration
+	Traceback (most recent call last):
+	  File "tools/setup_helpers/generate_code.py", line 129, in <module>
+		main()
+	  File "tools/setup_helpers/generate_code.py", line 124, in main
+		options.force_schema_registration,
+	  File "tools/setup_helpers/generate_code.py", line 35, in generate_code
+		from tools.autograd.gen_annotated_fn_args import gen_annotated
+	  File "/home/gxf/software/pytorch/tools/autograd/gen_annotated_fn_args.py", line 45
+		return f"{namespace}.{op_name(func)}: {out_args!r},"
+		                                                   ^
+	SyntaxError: invalid syntax
+
+
+
 
 44. install navidation:
 	could not find SDL:sudo apt-get install libsdl-dev
@@ -342,5 +359,68 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
 	   (2)生成注释文件：doxygen doxyconfig
 	   
+47.Python3.7 源码安装 必须cd /usr/src
 
+	https://developer.aliyun.com/article/675910	
 	
+	sudo apt-get install build-essential checkinstall
+	sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+		libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+	cd /usr/src
+	sudo wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
+
+	sudo tar xzf Python-3.7.0.tgz
+
+	cd Python-3.7.0
+	sudo ./configure --enable-optimizations
+	sudo make altinstall
+
+	make altinstall用于防止替换默认的python二进制文件/ usr / bin / python
+
+	python3.7 -V
+
+
+    #所以，我上面评论的第3步两个rm -rf应该不做
+    #创建软连接时将创建的软连接命名为python37,pip37。使用的时候命令行变成python37,pip37。
+    综上，第3步应为：
+    依据本文作者的路径创建新的软链接
+    sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37   #查看一下python37安装的位置，将路径修改一下
+    sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
+
+    4.最后查看Python3和pip3版本
+    python37 -V
+    pip37 -V
+    
+    修改python默认版本
+		将ubuntu默认版本改为python37：
+		sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
+		sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
+		
+		
+		python2.X修改为python3.X
+		#删除原有的Python连接文件
+		sudo rm /usr/bin/python
+
+		#建立指向Python3.X的连接
+		sudo ln -s /usr/bin/python3.5 /usr/bin/python
+
+		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
+		PATH=/usr/bin:$PATH
+
+		#验证，命令行输入python，就会输出新的版本。
+		python
+
+			python3.X还原为python2.X
+
+		#删除原有的Python连接文件
+		sudo rm /usr/bin/python
+
+		#建立指向Python2.X的连接
+		sudo ln -s /usr/bin/python2.7 /usr/bin/python
+
+		
+    
+	ModuleNotFoundError: No module named '_ctypes' 解决记录
+		https://www.cnblogs.com/abeen/p/9355389.html
+	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
+	  
