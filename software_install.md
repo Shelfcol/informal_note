@@ -136,16 +136,6 @@
      	sudo ldonfig
 	https://blog.csdn.net/weixin_41896508/article/details/80795239
 	可能需要下载ippicv20151201,替换opencv-3.0.0/3rdparty/ippicv/downloads/linux-8b449a536a2157bcad08a2b9f266828b下面的压缩包即可
-
-3.b 配置编译opencv (NVIDIA CUDA版本)
-
-opencv最麻烦的地方就是编译是属性的配置，对于不同的需求要配置不同的属性。当使用NVIDIA GPU GeForce 1080ti的时候：
-
-  cmake  CMAKE_BUILD_TYPE=RELEASE  CMAKE_INSTALL_PREFIX=/usr/local INSTALL_PYTHON_EXAMPLES=ON INSTALL_C_EXAMPLES=OFF  OPENCV_EXTRA_MODULES_PATH=/home/gxf/software/opencv_contrib-3.2.0/modules  PYTHON_EXCUTABLE=/usr/bin/python  WITH_CUDA=ON  WITH_CUBLAS=ON  DCUDA_NVCC_FLAGS="-D_FORCE_INLINES"  CUDA_ARCH_BIN="10.0"  CUDA_ARCH_PTX=""  CUDA_FAST_MATH=ON  WITH_TBB=ON  WITH_V4L=ON  WITH_QT=false  WITH_GTK=ON  WITH_OPENGL=ON  BUILD_EXAMPLES=ON ..
-
-	ERROR:CMake Error: Variables are set to NOTFOUND
-		https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound		
-
 	make之后的配置https://www.jianshu.com/p/88ad5441c2ae
 
 
@@ -253,8 +243,16 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
 38.pytorch install:https://pytorch.org/get-started/previous-versions/
+<<<<<<< HEAD
 		ImportError: No module named machinery：换python3
 		当我安装了python3.7后，也将软链接python3生成到/usr/bin/python37,然后我执行python37 ./tools/build_libtorch.py，然后说我没有yaml文件，然后pip37 install PyYAML，说permission denied，因为我的python3.7是在usr里面的，所以sudo pip37 install PyYAML
+=======
+<<<<<<< HEAD
+		pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html ,直接安装成功，而且python2.7都能直接诶启动
+=======
+		ImportError: No module named machinery
+>>>>>>> 30ee358e06c6b75e61c3cd98f888221705ccbdf2
+>>>>>>> 10f49c13702bc064ee99faa5ebe82500f99e71b2
 
 39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
 			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
@@ -293,6 +291,9 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	cd ..
 	rm -rf build googletest-release-1.10.0 release-1.10.0.tar.gz
 
+<<<<<<< HEAD
+
+=======
 42.git@github.com: Permission denied (publickey). fatal: Could not read from remote repository的问题解决:https://blog.csdn.net/dotphoenix/article/details/100130424
 
 43.pytorch install(no anaconda):
@@ -439,6 +440,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	ModuleNotFoundError: No module named '_ctypes' 解决记录
 		https://www.cnblogs.com/abeen/p/9355389.html
 	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
+
 
 48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
 
