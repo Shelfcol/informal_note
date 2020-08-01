@@ -253,7 +253,8 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
 38.pytorch install:https://pytorch.org/get-started/previous-versions/
-		ImportError: No module named machinery
+		ImportError: No module named machinery：换python3
+		当我安装了python3.7后，也将软链接python3生成到/usr/bin/python37,然后我执行python37 ./tools/build_libtorch.py，然后说我没有yaml文件，然后pip37 install PyYAML，说permission denied，因为我的python3.7是在usr里面的，所以sudo pip37 install PyYAML
 
 39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
 			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
@@ -319,7 +320,12 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		                                                   ^
 	SyntaxError: invalid syntax
 
-
+	成功：源码安装的pytorch没法使用，所以用pip安装，然后直接用python37就可以使用：pip install torch==1.2.0 torchvision==0.4.0 -f https://download.pytorch.org/whl/torch_stable.html
+	安装过程中可能因为网络问题一直retrying，但是没关系，等着就好了
+	可以直接下载whl文件进行下载，这样会比较快，成功的版本有：
+	sudo pip37 install torchvision-0.3.0-cp37-cp37m-linux_x86_64.whl  torch-1.1.0-cp37-cp37m-linux_x86_64.whl    37表示python3.7,pip37是我为python3.7配置的pip
+	sudo  pip install torchvision-0.3.0-cp27-cp27mu-linux_x86_64.whl torch-1.1.0-cp27-cp27mu-linux_x86_64.whl
+	torch卸载：sudo pip37 uninstall torch torchvision
 
 
 44. install navidation:
@@ -435,4 +441,10 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
 
 48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
+
+49.马太原学长代码安装：
+	 ./autogen.sh: autoreconf: not found：：  sudo apt-get install autoconf automake libtool
+	 “ Unrecognized syntax identifier "proto3". This parser only recognizes "proto2". (https://blog.csdn.net/weixin_43707303/article/details/89015920)
+
+50.pip指定版本：https://blog.csdn.net/weixin_43279032/article/details/104042093
 	  
