@@ -19,3 +19,10 @@ git add . #将当前修改添加至缓存区
 git commit -m '1' 
 git push #推送
 git push -u lab master#推送到lab上面，不是origin
+
+
+#给repo加tag，则后面可以下载对应的tag
+git add .
+git commit -m 'gxf'
+git tag -a v1.0 -m "version 1.0"
+git push origin v1.0
