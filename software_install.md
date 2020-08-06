@@ -244,10 +244,15 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
 38.pytorch install:https://pytorch.org/get-started/previous-versions/
 <<<<<<< HEAD
+		ImportError: No module named machinery：换python3
+		当我安装了python3.7后，也将软链接python3生成到/usr/bin/python37,然后我执行python37 ./tools/build_libtorch.py，然后说我没有yaml文件，然后pip37 install PyYAML，说permission denied，因为我的python3.7是在usr里面的，所以sudo pip37 install PyYAML
+=======
+<<<<<<< HEAD
 		pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html ,直接安装成功，而且python2.7都能直接诶启动
 =======
 		ImportError: No module named machinery
 >>>>>>> 30ee358e06c6b75e61c3cd98f888221705ccbdf2
+>>>>>>> 10f49c13702bc064ee99faa5ebe82500f99e71b2
 
 39.安装百度云:https://github.com/Shelfcol/deepin-wine-ubuntu
 			解压后切换到解压文件目录，在终端中运行（授予可执行权限后）： ./install.sh
@@ -316,7 +321,12 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		                                                   ^
 	SyntaxError: invalid syntax
 
-
+	成功：源码安装的pytorch没法使用，所以用pip安装，然后直接用python37就可以使用：pip install torch==1.2.0 torchvision==0.4.0 -f https://download.pytorch.org/whl/torch_stable.html
+	安装过程中可能因为网络问题一直retrying，但是没关系，等着就好了
+	可以直接下载whl文件进行下载，这样会比较快，成功的版本有：
+	sudo pip37 install torchvision-0.3.0-cp37-cp37m-linux_x86_64.whl  torch-1.1.0-cp37-cp37m-linux_x86_64.whl    37表示python3.7,pip37是我为python3.7配置的pip
+	sudo  pip install torchvision-0.3.0-cp27-cp27mu-linux_x86_64.whl torch-1.1.0-cp27-cp27mu-linux_x86_64.whl
+	torch卸载：sudo pip37 uninstall torch torchvision
 
 
 44. install navidation:
@@ -433,4 +443,22 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 
 
 48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
+
+49.马太原学长代码安装：
+	 ./autogen.sh: autoreconf: not found：：  sudo apt-get install autoconf automake libtool
+	 “ Unrecognized syntax identifier "proto3". This parser only recognizes "proto2". (https://blog.csdn.net/weixin_43707303/article/details/89015920)
+
+50.pip指定版本：https://blog.csdn.net/weixin_43279032/article/details/104042093
+51.安装https://gitlab.lrz.de/tum-cps/opendrive2lanelet ：
+	需要安装python3.5以上，我安装的python3.7
+	sudo python37 setup.py install
+
+	PyQt5安装失败：pip install PyQt5 -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com  加上国内镜像源
+	  Got keys from plugin meta data ("xcb")
+	  加在 opendrive2lanelet-gui报错：https://blog.csdn.net/sxcsxcsxcsxc/article/details/104961647
+	  
+	QFactoryLoader::QFactoryLoader() checking directory path "/usr/local/bin/platforms" ...
+		Cannot load library /usr/local/lib/python3.7/site-packages/PyQt5/Qt/plugins/platforms/libqxcb.so: (libxcb-xinerama.so.0: 无法打开共享对象文件: 没有那个文件或目录)
+		sudo apt-get  install libxcb-xinerama0
+
 	  
