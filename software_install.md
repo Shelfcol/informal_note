@@ -460,5 +460,4 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	QFactoryLoader::QFactoryLoader() checking directory path "/usr/local/bin/platforms" ...
 		Cannot load library /usr/local/lib/python3.7/site-packages/PyQt5/Qt/plugins/platforms/libqxcb.so: (libxcb-xinerama.so.0: 无法打开共享对象文件: 没有那个文件或目录)
 		sudo apt-get  install libxcb-xinerama0
-
-	  
+52.windows cuda cudnn安装：https://blog.csdn.net/SpadgerZ/article/details/89454247（cuda安装直接选择第一项，然后用默认的安装）
