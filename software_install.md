@@ -92,6 +92,7 @@
 
 10.安装google的cartographer：
 	https://google-cartographer-ros.readthedocs.io/en/latest/demos.html
+	https://blog.csdn.net/qq_26482237/article/details/92676267  两者辅助
         巨坑：开始自己装了一个pcl-1.9,就报各自pcl的time_h找不到之类查不到的错误，还有boost，我怀疑是pcl太新，导致与boost等库不兼容，以及与cartographer不兼容，联想到ros里面预装了一个pcl-1.7,所以我就将pcl-1.9卸载，然后再重新按照网址安装cartographer（需要执行所有步骤），就成功，所以不要装其他的pcl，ros自带的就OK
         https://blog.csdn.net/qq_26482237/article/details/92676267   change ceres-solver location
 
@@ -242,7 +243,8 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	然后开机之后unlock那里有个齿轮,选择gdm
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
-38.pytorch install:https://pytorch.org/get-started/previous-versions/
+38.pytorch c++使用：https://pytorch.org/cppdocs/installing.html
+	pytorch install:https://pytorch.org/get-started/previous-versions/
 <<<<<<< HEAD
 		ImportError: No module named machinery：换python3
 		当我安装了python3.7后，也将软链接python3生成到/usr/bin/python37,然后我执行python37 ./tools/build_libtorch.py，然后说我没有yaml文件，然后pip37 install PyYAML，说permission denied，因为我的python3.7是在usr里面的，所以sudo pip37 install PyYAML
@@ -461,4 +463,5 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		Cannot load library /usr/local/lib/python3.7/site-packages/PyQt5/Qt/plugins/platforms/libqxcb.so: (libxcb-xinerama.so.0: 无法打开共享对象文件: 没有那个文件或目录)
 		sudo apt-get  install libxcb-xinerama0
 
-	  
+52.rosdep update :rosdep update urlopen error [Errno 111] Connection refused>
+https://blog.csdn.net/mrh1714348719/article/details/103803110
