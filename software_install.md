@@ -475,3 +475,10 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 	sudo apt-get install dkms
 	sudo dkms install -m nvidia -v 418.56
 	注意自己安装的驱动版本号得对应
+
+54.libtorch的cuda10.0的下载地址
+	windows：
+	https://download.pytorch.org/libtorch/cu100/libtorch-win-shared-with-deps-1.2.0.zip
+
+	linux：
+	https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-1.2.0.zip
