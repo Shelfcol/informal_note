@@ -476,9 +476,58 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 	sudo dkms install -m nvidia -v 418.56
 	注意自己安装的驱动版本号得对应
 
-54.libtorch的cuda10.0的下载地址
+54.libtorch的cuda10.0的下载地址:这个是ABI=0对应的版本，用不了
 	windows：
 	https://download.pytorch.org/libtorch/cu100/libtorch-win-shared-with-deps-1.2.0.zip
 
 	linux：
 	https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-1.2.0.zip
+	
+55.ORB-SLAM2引用torch的方法：
+	c++使用pytorch的时候只需要下载对应的libtorch，然后根据官网上的c++ example（https://pytorch.org/tutorials/advanced/cpp_export.html）用几个命令即可在CMakeLists.txt中链接上。
+	当将pytorch写入CMakeLists.txt之后，发现pangolin，DBoW3的为未定义的引用，原本这些库都是没有问题的，所以明显是torch的问题。是因为我下载的Libtorch 的 cxx11 ABI =0,而其他库编译的ABI=1，所以需要寻找相应的libtorch
+	https://github.com/pytorch/pytorch/issues/17492
+
+	Libtorch with cxx11 ABI are now available for download:
+
+	v1.2.0:
+
+	CPU:
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+
+	CUDA 9.2:
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+
+	CUDA 10.0:
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+
+	Nightly builds:
+
+	CPU:
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-without-deps-latest.zip
+
+	CUDA 9.2:
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-without-deps-latest.zip
+
+	CUDA 10.0:
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-without-deps-latest.zip
+
+	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
