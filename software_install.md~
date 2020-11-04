@@ -469,3 +469,16 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 =======
 52.windows cuda cudnn安装：https://blog.csdn.net/SpadgerZ/article/details/89454247（cuda安装直接选择第一项，然后用默认的安装）
 >>>>>>> fdf427b1eb984e93b162ec4083e23f2dfe8a75bf
+
+53.无法连接NVIDIA驱动：NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver
+	https://blog.csdn.net/hangzuxi8764/article/details/86572093
+	sudo apt-get install dkms
+	sudo dkms install -m nvidia -v 418.56
+	注意自己安装的驱动版本号得对应
+
+54.libtorch的cuda10.0的下载地址
+	windows：
+	https://download.pytorch.org/libtorch/cu100/libtorch-win-shared-with-deps-1.2.0.zip
+
+	linux：
+	https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-1.2.0.zip
