@@ -81,7 +81,7 @@
 	Technical Information:
 	code:00000A00/0B1A, info:0000000000135
 	XINPUT1_ 3.dll
-
+	
 	解决：下载DirectX修复工具http://www.onlinedown.net/soft/120082.htm
 
 8.SolidWorks2018安装：
@@ -104,7 +104,8 @@
 	  /home/gxf/.local/lib/python2.7/site-packages/cmake/data/share/cmake-3.18/Modules/FindProtobuf.cmake:626 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
 	  CMakeLists.txt:35 (find_package)
 
-	
+
+​	
 
 
 11.vs2017安装完后再装2015：
@@ -175,9 +176,9 @@ sudo cp /usr/local/cuda-10.0/lib64/libcudart.so.10.0 /usr/local/lib/libcudart.so
 sudo cp /usr/local/cuda-10.0/lib64/libcublas.so.10.0 /usr/local/lib/libcublas.so.10.0 && sudo ldconfig
 sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so.10.0 && sudo ldconfig
 
-	
+
 	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
-	
+
 20.yolov3配置：
 	https://blog.csdn.net/qq_36327203/article/details/84305303
 	
@@ -223,7 +224,7 @@ sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so
 33.jupyter 转python： jupyter nbconvert --to script xxx.ipynb
 
 34. Could not find a package configuration file provided by "tf2_sensor_msgs"
-  with any of the following names:
+    with any of the following names:
 
     tf2_sensor_msgsConfig.cmake
     tf2_sensor_msgs-config.cmake
@@ -356,8 +357,9 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	    FILE_PATTERNS = *.c *.cpp *.h *.hpp，指定各种文件，我们常用为*.cpp *.c *.h，等等。
 	    EXTRACT_PRIVATE = YES，显示类的私有成员变量和函数。
 	    RECURSIVE=YES，生成子目录的注释文件
-	    
-	    
+
+
+​	    
 	    /*********************************/
 	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
 	    DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
@@ -367,7 +369,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
 	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
 	   (2)生成注释文件：doxygen doxyconfig
-	   
+
 47.Python3.7 源码安装 必须cd /usr/src
 
 	https://developer.aliyun.com/article/675910	
@@ -377,15 +379,15 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 	cd /usr/src
 	sudo wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
-
+	
 	sudo tar xzf Python-3.7.0.tgz
-
+	
 	cd Python-3.7.0
 	sudo ./configure --enable-optimizations
 	sudo make altinstall
-
+	
 	make altinstall用于防止替换默认的python二进制文件/ usr / bin / python
-
+	
 	python3.7 -V
 
 
@@ -395,7 +397,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     依据本文作者的路径创建新的软链接
     sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37   #查看一下python37安装的位置，将路径修改一下
     sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
-
+    
     4.最后查看Python3和pip3版本
     python37 -V
     pip37 -V
@@ -404,41 +406,44 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     	不要将python默认版本改为python37！！！！！！！！！！！！！！！！！！！！！！！！！不然会出很多问题，终端打不开，不能更新
     	Ubuntu 16.04 卸载自带 Python3 引发的惨案   https://blog.csdn.net/sinat_38682860/article/details/103276156
     	# 添加 python37 的软链接
-		sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37
-		# 添加 pip3 的软链接（这样pip3就是python3.7专用的，也可以起名为 pip37，不影响python3.5的pip3）
-		sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
-			
-			
-			
-			
+    	sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37
+    	# 添加 pip3 的软链接（这样pip3就是python3.7专用的，也可以起名为 pip37，不影响python3.5的pip3）
+    	sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
+
+
+​			
+​			
+​			
 		!!!!!!!错误：将ubuntu默认版本改为python37：
 		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
 		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
-		
-		
+
+
+​		
 		python2.X修改为python3.X
 		#删除原有的Python连接文件
 		sudo rm /usr/bin/python
-
+	
 		#建立指向Python3.X的连接
 		sudo ln -s /usr/bin/python3.5 /usr/bin/python
-
+	
 		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
 		PATH=/usr/bin:$PATH
-
+	
 		#验证，命令行输入python，就会输出新的版本。
 		python
-
+	
 			python3.X还原为python2.X
-
+	
 		#删除原有的Python连接文件
 		sudo rm /usr/bin/python
-
+	
 		#建立指向Python2.X的连接
 		sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
-		
-    
+
+​		
+​    
 	ModuleNotFoundError: No module named '_ctypes' 解决记录
 		https://www.cnblogs.com/abeen/p/9355389.html
 	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
@@ -482,48 +487,48 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 
 	linux：
 	https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-1.2.0.zip
-	
+
 55.ORB-SLAM2引用torch的方法：
 	c++使用pytorch的时候只需要下载对应的libtorch，然后根据官网上的c++ example（https://pytorch.org/tutorials/advanced/cpp_export.html）用几个命令即可在CMakeLists.txt中链接上。
 	当将pytorch写入CMakeLists.txt之后，发现pangolin，DBoW3的为未定义的引用，原本这些库都是没有问题的，所以明显是torch的问题。是因为我下载的Libtorch 的 cxx11 ABI =0,而其他库编译的ABI=1，所以需要寻找相应的libtorch
 	https://github.com/pytorch/pytorch/issues/17492
 
 	Libtorch with cxx11 ABI are now available for download:
-
+	
 	v1.2.0:
-
+	
 	CPU:
 	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
-
+	
 	CUDA 9.2:
 	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
-
+	
 	CUDA 10.0:
 	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
 	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
-
+	
 	Nightly builds:
-
+	
 	CPU:
 	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-without-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-without-deps-latest.zip
-
+	
 	CUDA 9.2:
 	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-without-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-without-deps-latest.zip
-
+	
 	CUDA 10.0:
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-without-deps-latest.zip
@@ -533,4 +538,9 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 	
 	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
+<<<<<<< HEAD
 	https://pytorch.org/
+=======
+
+56.源码阅读软件understand安装：https://m.jb51.net/softs/633733.html
+>>>>>>> 18eb97673cb1f804b44277608cc01042aa8b2119
