@@ -529,5 +529,8 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-without-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-without-deps-latest.zip
+	
+	
 	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
+	https://pytorch.org/
