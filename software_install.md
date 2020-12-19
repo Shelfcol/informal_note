@@ -360,15 +360,15 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 
 
 ​	    
-	    /*********************************/
-	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
-	    DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
-	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
-	    PROJECT_NUMBER = “1.0 beta”，项目版本号。
-	    IMAGE_PATH = image_dir，指定图片存放的目录，我们将图片放到当前目录下的image_dir目录中，因为我们的文档会出现测试图片示例。
-	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
-	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
-	   (2)生成注释文件：doxygen doxyconfig
+​	    /*********************************/
+​	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
+​	    DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
+​	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
+​	    PROJECT_NUMBER = “1.0 beta”，项目版本号。
+​	    IMAGE_PATH = image_dir，指定图片存放的目录，我们将图片放到当前目录下的image_dir目录中，因为我们的文档会出现测试图片示例。
+​	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
+​	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
+​	   (2)生成注释文件：doxygen doxyconfig
 
 47.Python3.7 源码安装 必须cd /usr/src
 
@@ -414,16 +414,16 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 ​			
 ​			
 ​			
-		!!!!!!!错误：将ubuntu默认版本改为python37：
-		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
-		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
+​		!!!!!!!错误：将ubuntu默认版本改为python37：
+​		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
+​		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
 
 
 ​		
-		python2.X修改为python3.X
-		#删除原有的Python连接文件
-		sudo rm /usr/bin/python
-	
+​		python2.X修改为python3.X
+​		#删除原有的Python连接文件
+​		sudo rm /usr/bin/python
+​	
 		#建立指向Python3.X的连接
 		sudo ln -s /usr/bin/python3.5 /usr/bin/python
 	
@@ -444,9 +444,9 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 
 ​		
 ​    
-	ModuleNotFoundError: No module named '_ctypes' 解决记录
-		https://www.cnblogs.com/abeen/p/9355389.html
-	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
+​	ModuleNotFoundError: No module named '_ctypes' 解决记录
+​		https://www.cnblogs.com/abeen/p/9355389.html
+​	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
 
 
 48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
@@ -534,8 +534,9 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-without-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-with-deps-latest.zip
 	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-without-deps-latest.zip
-	
-	
+
+
+​	
 	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
 	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
 <<<<<<< HEAD
@@ -544,3 +545,12 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 
 56.源码阅读软件understand安装：https://m.jb51.net/softs/633733.html
 >>>>>>> 18eb97673cb1f804b44277608cc01042aa8b2119
+
+57.google浏览器屏蔽特定网站：https://blog.csdn.net/oLevin/article/details/50352485
+
+​      	需要在Hosts文件中添加规则
+​     	以管理员身份运行【记事本】
+​		打开C:\system32\drivers\etc\hosts
+​		添加规则，127.0.0.1   需要禁止的网址，比如:
+
+​		127.0.0.1  www.baidu.com
