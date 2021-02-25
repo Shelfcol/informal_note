@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1614072243 source:c:\senior\master\informal_note\algorith_exercise\sort_algorithm\main.cpp
+	<iostream>
+	<vector>
+

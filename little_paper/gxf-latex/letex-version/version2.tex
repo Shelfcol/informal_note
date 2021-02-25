@@ -1,0 +1,561 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+\usepackage{graphicx}
+\usepackage{caption2}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+ \usepackage{multirow}
+ \usepackage{tabularx} 
+  \usepackage{array} 
+    \usepackage{booktabs} 
+    \usepackage{setspace}
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\title{\LARGE \bf
+ASD-SLAM:  A Novel Adaptive-Scale Descriptor Learning for Visual SLAM 
+}
+
+
+\author{Taiyuan Ma$^{1}$ and Yaifei Wang$^{2}$% <-this % stops a space
+\thanks{*This work was not supported by any organization}% <-this % stops a space
+\thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
+        University of Twente, 7500 AE Enschede, The Netherlands
+        {\tt\small albert.author@papercept.net}}%
+\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
+        Dayton, OH 45435, USA
+        {\tt\small b.d.researcher@ieee.org}}%
+}
+
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+Visual Odometry and Simultaneous Localization and Mapping SLAM) are widely used in virtual reality(VR), augmented reality(AR), and autonomous driving. In the traditional keypoint-based visual SLAM systems, the feature matching accuracy of the front end plays a decisive role and becomes the bottleneck restricting the positioning accuracy, especially in some challenging scenarios like strong viewpoint, illumination changes and highly repetitive scenes. Thus, increasing the discriminability and matchability of feature descriptor is of importance to improve the positioning accuracy of visual SLAM.  In this paper, we proposed a novel adaptive-scale triplet loss function combining triplet network to generate adaptive-scale descriptor(ASD). Based on ASD, we designed our monocular SLAM system (ASD-SLAM). ASD-SLAM is an deep-learning enhanced extension of the ORB-SLAM system which is a state-of-the-art system. The experimental results show that ASD achieves better performance on the Brown datasets, at the same time, the ASD-SLAM system also outperforms the current popular visual SLAM frameworks on the KITTI Odometry Dataset. 
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{INTRODUCTION}
+
+Feature matching [1] is one of the key steps for Simultaneous Localization and Mapping (SLAM), which in turn depends on the quality of descriptors. The descriptors are feature abstraction of the original pixels of the images. Good descriptors should be able to cope with image transformation, illumination changes, etc. while describing the image features.
+Over the past decade, researches in keypoint descriptors focused on hand-crafted solutions such as SIFT [3], SURF [4] and ORB [5]. These descriptors still play an important role in current popular visual SLAM frameworks like [6]. Among these hand-drift descriptors, the sift descriptor has a higher matching precision, but requires too much computation. 
+The recent rise of deep learning has created the opportunity to develop learning-based, data-driven techniques of keypoint description. According to [10], the descriptors coming from trained-CNN outperform the hand-crafted descriptors in terms of their invariance properties in patch verification tasks. Among trained CNNs for keypoint description [7-9][13-21], the most notable models are DeepDesc [7], L2-Net [8], CS L2-Net [8] and HardNet [9], they produce 128 or 256 dimensions unit eigenvectors like SIFT, ORB. All studies on trained CNNs for keypoint description inevitably evaluated their performance against hand-crafted descriptors, with the common conclusionthat they outperform the hand-crafted descriptors in terms of their invariance properties [10].
+Although these descriptors achieve good performance in patch verification tasks, they are not popular in practical applications. Especially, according to a recent research [11], in some complicated tasks, like SFM, traditional hand-crafted features (SIFT [3] and its variants [12]) still prevail over the learned ones. The main reason is that most researches did not consider the specificities of the specific applications when designing loss functions, which made the descriptors difficult to apply to practical applications. Traditionally, most researches focus on data augmentation or build more suitable datasets to increase the robust to illumination and viewpoint changes in practical applications and ignore the importance of losses functions. For example, most learning-based methods adopt Siamese losses [7],[13-16] and Triplet losses [8][9][17-21] whose goal is to reduce the distance between similar image patches and increase the distance of dissimilar ones. Generally, Triplet losses are generally reported to outperform Siamese losses according to [21]. However, Triplet losses have a problem of scale uncertainty, according to [22], which is fatal to the feature matching between multiple image frames of SLAM and SFM. Therefore, in this paper, combining with the characteristics of feature matching in SLAM application, we proposed an Adaptive-Scale Triplet Networks with our Adaptive-Scale Triplet Losses to better solve the problem of scale uncertainty and obtain our adaptive-scale descriptor (ASD). Moreover, we use this descriptor to replace the front end of the traditional visual SLAM framework to design the deep-learning enhanced SLAM system(ASD-SLAM). The experimental results show that our adaptive-scale descriptor (ASD) has the better performance in patch verification tasks, at the same time, the ASD-SLAM positioning results are more accurate than the influential monocular SLAM systems like ORB-SLAM, LDSO. In addition, ASD is not only applied to SLAM, but also can be extended to other similar fields, such as SFM and our ASD-SLAM system can run on low-loss GPUs with good real-time performance. In summary, our main contributions are the following:
+\begin{itemize}
+\item We proposed an adaptive-scale triplet loss function in triplet network to get descriptors (ASD) with better performance on the public dataset.
+\item Second, we design our deep-learning enhanced SLAM system (ASD-SLAM), and get a better result comparing to state-of-the-art visual SLAM systems like ORB-SLAM and LDSO.
+\item We make our implementation publicly available.
+\end{itemize}
+
+\section{RELATED WORK}
+In this Section we review related work with respect to the two fields that we integrate within our research, local feature des- criptor and deep learning enhanced SLAM.
+\subsection{Local Feature Descriptor}
+Parallel with the long history of local feature, numerous rese- archers have made considerable attempts. Classical hand- craft local features like SIFT [3], SURF [4], ORB [5]proved to be effective in SFM, SLAM , 3D reconstruction, etc. After that, based on traditional hand-craft descriptors, combined with machine learning to generate, Binboost [27], RMGD [29], PCA- SIFT [24], etc. Although each descriptor has its own characteristics, they are basically designed to reduce the computational complexity of descriptors and map descriptors from high-dimensional space to low-dimensional space to improve real-time performance. However, such an operation causes the descriptor to lose a large amount of information and reduces the feature expression ability of the descriptor.
+In recent years, lots of papers in deep-learning based descriptor are proposed. Mainly divided into two categories, one is an end-to-end network framework, and the other is based on multi-branch CNN network like Siamese and triplet networks.
+First, an end-to-end learning network extracts feature points and descriptors simultaneously. Lift [33], trains the network from the back to the front, first trains the descriptors, estimates in the training direction, and finally trains the feature point detection module to implements the full feature point handling pipeline. SuperPoint [31], which builds a network training data set by artificially setting corner points, and labels the data set according to Homographic Adaptation on the dataset. LF-Net [32] embeds the entire feature extraction pipeline, and can be trained end-to-end with a small amount of images, However, LF-Net need to use image pairs with known relative pose and corresponding depth maps to generate training data, this limits the use of the network in some scenarios such as SLAM, SFM.
+Second, [34] first proposed the siamese network in signa- ture verification. [14]’s goal is to directly use CNN's powerful feature expression skills to learn a common similarity function for image patches. [13] ( MatchNet ) proposed a joint learning patch representation of a deep network and a robust feature comparison network structure. This paper uses the fully connected layer to represent the similarity of two descriptors through the learned distance metric. Above are based on the pairwise siamese structure. However, all of above are proved to be not suitable to use fast approximate nearest neighbor algorithms for matching. [18][35] uses triplet structure and achieves better performance than siamese structure with metric learning layer. [8] proposed L2-net, and the descriptor can be matched by L2 distance while getting better performance descriptors, and L2-net uses a progressive sampling strategy which enables the network to access billions of training samples in a few epochs. Based on [8], Hardnet [9] adopted hardest negative mining strategy to select n hard-negative samples among n2-n negative samples of L2Net, and achieve state-of-the-art performance. [36] proposed DOAP, which use listwise ranking sampling strategy to train the model. [22] was trained by a mixed-context loss with the same architecture as L2Net, and improved the performance of descriptor. [22] firstly pay attention to the importance of scale in triplet losses. However, in [22], scale correction parameter is setted manually.
+\subsection{Visual Slam With CNN}
+
+Deep learning is a powerful method to solve feature description and data association problems encountered in the traditional SLAM framework. Some studies abandoned directly the traditional SLAM framework, using an end-to-end network architecture [38,39,40,41]. Although the end-to-end network structure makes the entire SLAM system more integrated, in most scenarios, the effect is not as good as the traditional SLAM. SLAM based on end-to-end has a weak scene generalization ability. In order to enhance the adaptability of the SLAM system in special scenarios, the semantic SLAM has become a hot topic in current research. 44] combines semantic segmentation network with moving consistency check method to reduce the impact of dynamic objects. [45] uses the professional probability model to extract the semantic information from the scene, and combines feature-based and direct approaches to achieve positioning in highly dynamic environments. [46] learn a discriminative holistic image representation to create a dense and salient scene description, to deal the changing weather conditions, illumination and seasons.
+The most relevant to our research are [43,47]. They replace the feature extraction and matching module of traditional SLAM to enhance the performance of SLAM system. [43] apply descriptor learning to construct line segment descriptors optimized for matching tasks. This method has better adaptability in scenes with many line features, but it will fail in some scenes with few line features. [47] project descriptor space to lower-dimensional Euclidean space, with n a novel supervised learning strategy employing a triplet loss. However, [47] does not take into account the scale uncertainty of triplet loss, and, it just verifies the matching performance between two frames, and does not apply the descriptor to the actual SLAM to verify effect.
+
+
+\section{METHODS}
+
+\subsection{The Influence Of Scale In Triplet Losses On SLAM } 
+Monocular SLAM systems solve pose transformation by matching the descriptors of adjacent frames, combined with visual geometry, and triangulate the depth of the feature points. Figure 1 shows the process. Each frame which observed the same feature point will calculate the descriptor of the feature point. Therefore, each feature point formed a set of matching descriptors:
+$$
+D_{kp}=\left \{ \left ( k_{i},X_{i} \right ) \right \}_{i}^{N} \eqno{(1)}
+$$
+Each $ k_{i}$ is  a 128-dimensional feature descriptor  , $X_{i}$ is the frame number. $N^{}$ represents the number of frames in which the feature point is observed. In the process of building the map, the depth of each feature point is obtained, and then the mappoint is formed , and the mappoint maintains a descriptor $k_{mp}$ from $D_{kp}$ . At the same time, $k_{mp}$ will be updated continuously as new image frames are added. Descriptor  $k_{mp}$ plays an important role in the subsequent SLAM process.
+As Fig. 1 shows , we assume that  mappoint  corresponding to$ f_{1}$ is $mp_{1}$ triangulated by frames$\left ( X_{1},X_{2},X_{3}  \right )$ , the descriptor corresponding to  $ f_{1}$ is   $ k_{mp1}$. We find that $X_{5}$ get the tracking of $f_{1}$ again after$X_{4}$ lost it. We assume that $k_{5}^{1}$  is the descriptor generated by $X_{5}$ for $ f_{1}$. How to associate the descriptor $k_{5}^{1}$ with $ k_{mp1}$ ?  Generally  , we need to calculate the  minimum distance $d_{\left ( k_{mp1},k_{5}^{1} \right )}  = \left \| k_{mp1} - k_{5}^{1}  \right \| $  with the method of nearest neighbor search, if   $d_{\left ( k_{mp1},k_{5}^{1} \right )} $$ \leq $$ a_{threshold}$ . $ k_{mp1}$ and $k_{5}^{1}$ are successfully associated .  From this view ,$a_{threshold}$ is a key parameter . If  $a_{threshold}$ is too small , we are more likely to lose tracking  , however , too large value will increase mismatching. Theoretically , the smaller $D_{kp}$  divergence like (a) in Fig. 2, the better for SLAM.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{figure1}
+\caption{An illustration of monocular SLAM problem.  The feature $ f_{1}$ generally observed in sucessive frames$\left ( X_{1},X_{2},X_{3}  \right )$ , $X_{5}$ and is then triangulated  as  a map point in the map.}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\subfigure[]{
+\begin{minipage}[t]{0.4\linewidth}
+\centering
+\includegraphics[scale=0.25]{figure2-small.pdf}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.6\linewidth}
+\centering
+\includegraphics[scale=0.25]{figure2-big.pdf}
+%\caption{fig2}
+\end{minipage}%
+}%
+\centering
+\caption{ The descriptors  sets of feature $ f_{1}$  (blue), $ f_{2}$ (orange) are illustrated in a three-dimensional descriptor space. (a) is the ideal situation for SLAM , increase the divergence of two descriptors set to get (b). However , the  $ \rho_{sub}$between (a) and (b) are same.}
+\end{figure}
+
+
+Due to learning feature descriptors with triplets of examples, gives much better results than learning with pairs like [13-14][34] using the same network according to [21]. Inspired by this, most researchers focus on learning feature descriptors  with triplet losses based on triplets of patches. Learning with triplets involves training from samples of the form $\left \{ x_{a},x_{p},x_{n} \right \} $ , $x_{a}$ is called the anchor  , $x_{p}$ is a different sample of the same class as $x_{a}$ , $x_{n}$ is a sample belonging to a different class . The output of $\left \{ x_{a},x_{p},x_{n} \right \} $  after propagation through the network is $\left \{ y_{a},y_{p},y_{n} \right \} $ . The training goal of the network is bringing $x_{a}$ and $x_{p}$ close in the feature space, and pushes $x_{a}$ and  $x_{p}$ far away. In that process , the positive distance $\delta _{+}$ and the negative distance $\delta _{-}$ are computed:
+$$
+\delta _{+} =\left \| x_{a} - x_{p} \right \| \eqno{(2)}
+$$
+$$
+\delta _{-} =\left \| x_{a} - x_{n} \right \| \eqno{(3)}
+$$
+The objective of a triplet lose is to increases the distance between $\delta _{+}$ and $\delta _{-}$ . For this purpose, the following triplet losses are proposed, giving the hinge loss [9,13,14,18,20]:
+$$
+\varphi \left ( \delta _{+} , \delta _{-} \right ) = \max (a + \delta _{+} - \delta _{-}  ) \eqno{(4)}
+$$
+$$
+\varphi \left ( \delta _{+} ^{2} , \delta _{-} ^{2}\right ) = \max (a + \delta _{+} ^{2} - \delta _{-} ^{2}) \eqno{(5)}
+$$
+As for the losses (2) (3) , we define $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right ) = \delta _{+} - \delta $ , $\rho _{sub}^{2}\left ( \delta _{+}^{2} , \delta _{-}^{2} \right ) = \delta _{+}^{2} - \delta _{-}^{2}$ to specify the performance of (2)(3).
+In Fig. 3 (a), we find  $\left ( \delta _{+} , \delta _{-} \right )$ fall on the intersection of the two surfaces have the same $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right )$. In other words, $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right ) = \rho _{sub}\left ( \delta _{+} + \Delta  , \delta _{-} + \Delta  \right  )$.  The same principle applies to (3) in the in Fig. 3 (b).  This is the scale uncertainty problem [22] of triplet losses which is caused by the discontinuity of descriptor space . 
+
+However, the scale uncertainty problem of triplet losses is fatal to the feature matching in the SLAM process.  For example ,  comparing to  Fig 2 (a)  , in  Fig 2 (b) , $\delta _{+}$ and $\delta _{-}$increase simultaneously and $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right )$ keep same. Even  in some cases, $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right ) < \delta _{+}$ , and we can't distinguish whether the sample belong to positive samples or negative samples. In this case, the mismatching  of feature  in the SLAM process will happen.
+
+\begin{figure}[htbp]
+\centering
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.3]{figure3-1.pdf}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.3]{figure3-2.pdf}
+%\caption{fig2}
+\end{minipage}%
+}%
+\centering
+\caption{ An illustration of   $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right ) $ and $\rho _{sub}^{2}\left ( \delta _{+}^{2} , \delta _{-}^{2} \right ) $. }
+\end{figure}
+
+
+
+
+\subsection{Adaptive-Scale Triplet Loss } 
+To ensure that the matching descriptors have smaller distance than non-matching descriptors in SLAM, we need to solve the scale uncertainty problem by designing special loss function. To explain our loss clearly, we should introduce the loss of [22] first:
+$$
+\theta _{loc} = \frac{1}{2}\left ( \delta _{+} + \delta _{-} \right ) \eqno{(5)}
+$$
+$$
+\theta _{mix} = \frac{1}{2}\gamma \theta _{loc} + \left ( 1 - \gamma  \right )\theta _{glo} \eqno{(6)}
+$$
+$$
+smax(\delta _{+} , \delta _{-}) = \exp (\delta _{+} )/\left (  \exp (\delta _{+} ) + \exp (\delta _{-} )\right )\eqno{(7)}
+$$
+$$
+\begin{aligned}
+L_{\left ( \delta _{+} , \delta _{-} \right )} = -\frac{1}{2\delta }\log (smax(2\delta \left ( \theta _{mix} - \delta _{+} \right ) , 0))  
+\\-\frac{1}{2\delta }\log (smax(2\delta \left ( \delta _{-} - \theta _{mix}  \right ) , 0)) 
+\end{aligned}
+\eqno{(8)}
+$$
+In (5) (6) (7) (8) , $\theta _{mix}$  mix the global context $\theta _{glo}$ and the local context $\theta _{loc}$ ,  $\gamma$ represents the ratio of $\theta _{loc}$ in the mixed-context , $\delta$ is the key scale correction parameter. [22] combines $\theta _{glo}$ and $\theta _{loc}$ to take advantage of the Siamese network and triplet network. However, [22] set the scale correction parameter $\delta$ and $\theta _{glo}$ manually, which will cause several major shortcomings, firstly , as [22] descripted , an unreasonable $\theta _{glo}$ is easy to cause the network to diverge ; secondly , we need set different $\theta _{glo}$ and $\delta$ in different datasets when we train the network, which increase the work for traning and can not guarantee the performance of the network at the same time.
+
+As we descripted in Sec A, the fundamental solution is to find a multivariate function, which has a unique solution for each function value. However, it may be impractical to find such a loss function while meeting the requirements of the network model, but we can guide the network learning by designing a reminder about scale changes. Here we choose the reminder as:
+$$
+\xi  = \frac{\delta _{-}}{\delta _{+}}\eqno{(9)}
+$$
+Supposing that when we keep  $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right )$ same between (a) and (b) in Fig. 2 , $ \xi _{a}>\xi _{b}$. So the scale reminder  $ \xi $  can  reflect  the changes of the scale.  Based on this the scale reminder,  we designed our loss function  , our function consists of two parts: adaptive-scale loss , loss of correlation penalty for descriptor compactness  . We will describe each loss in detail below.
+
+Firstly, we proposed our adaptive-scale loss as follows:
+$$
+\theta  = \frac{1}{2}\left ( \delta _{+} + \delta _{-} \right )\eqno{(10)}
+$$
+$$
+\begin{aligned}
+T_{\left ( \delta _{+} , \delta _{-} \right )} = -\frac{1}{2\xi  }\log (smax(2\xi  \left ( \theta _{mix} - \delta _{+} \right ) , 0))  
+\\-\frac{1}{2\xi  }\log (smax(2\xi  \left ( \delta _{-} - \theta _{mix}  \right ) , 0)) 
+\end{aligned}
+\eqno{(11)}
+$$
+In above equations, we abandon global context, more importantly ,  we take $\xi$ as the scale correction parameter which  can adjust adaptively in network training. In addition, we plot  our adaptive-scale loss, loss function in [22], the common triplet loss function  and their derivative in three-dimensional space illustrated in Fig. 4 . It seems unlikely that if we have a loss function that contains $\delta _{+}$ and $\delta _{-}$ and has a unique solution $\left ( \delta _{+}, \delta _{-} \right )$ at the same loss value . We can assume that during the model training, when the loss value drops to a certain value  $L_{0}$, theoretically, at this time, we cannot determine the effect of the model, because there are multiple solutions for the loss value $L_{0}$ which will generate different performance. However, we want the model to get a smaller  $\delta _{+}$ and a larger $\delta _{-}$. As is known, in the process of model training, the decisive factor for guiding model training is the gradient. We only need to ensure that the gradient value of each point on the green line in Fig.  4 is different, and can guide the model to converge to the desired solutions. In (b)(c), we can see that when the loss value is the same, the corresponding gradient value is almost the same, especially (c), the gradient value is the same throughout the solution space. Therefore, it is very hard for (b) and (c) to get the desired performance. In (a), the above problems does not exist, the loss function (11) is more likely to guide the model to the desired result . 
+
+\begin{figure}[htbp]
+\centering
+\subfigure[]{
+\begin{minipage}[t]{1\linewidth}
+\centering
+\includegraphics[scale=0.29]{figure4a}
+%\caption{fig1}
+\end{minipage}%
+}%
+\\
+\subfigure[]{
+\begin{minipage}[t]{1\linewidth}
+\centering
+\includegraphics[scale=0.31]{figure4b}
+%\caption{fig1}
+\end{minipage}%
+}%
+\\
+\subfigure[]{
+\begin{minipage}[t]{1\linewidth}
+\centering
+\includegraphics[scale=0.3]{figure4c}
+%\caption{fig1}
+\end{minipage}%
+}%
+\centering
+\caption{An illustration of loss functions (left)  and the sum of the squares of the derivative values corresponding to each loss function(right), $diff = \sqrt[2]{\frac{\partial L}{\partial \delta _{+}}^{2} + \frac{\partial L}{\partial \delta _{-}}^{2}}$, the green line is the set of points corresponding to the same loss value , (a) and (b) are the loss functions of (12) and (10) , (c) corresponds to the traditional triplet loss with a stable scale, $L_{margin} = \delta _{+} - \delta _{-} + a_{const}.$ } 
+\end{figure}
+Secondly, to make the descriptors more differentiable, we adopt the correlation matrix which descripted in [8] to calculate loss of correlation penalty for descriptor compactness. We just use the anchor samples. We define $Y_{a} = \left [ y_{1},\cdots, y_{m},\cdots y_{q}\right ]^{T}$ as the output of the q anchor samples after propagation through the network. The correlation matrix  $R = \left [ r_{mn} \right ]_{q\times q}$ is defined as
+
+\begin{small} 
+\begin{equation} 
+r_{mn} = \frac{(y_{m}-\bar{y_{m}})^{T}(y_{n}-\bar{y_{n}})}{\sqrt{(y_{m}-\bar{y_{m}})^{T}(y_{m}-\bar{y_{m}})}\sqrt{(y_{n}-\bar{y_{n}})^{T}(y_{n}-\bar{y_{n}})}} \tag{12}
+\end{equation} 
+\end{small}
+
+Where $\bar{y_{m}}$is the mean of the mth row in$Y_{a}$. So the loss of correlation penalty is:
+
+\begin{small} 
+\begin{equation} 
+C_{orr} = \frac{1}{2}\left ( \sum_{m\neq n}^{1} (r_{mn})^{2} \right ) \tag{13}
+\end{equation} 
+\end{small}
+
+To sum up, $T_{\left ( \delta _{+} , \delta _{-} \right )}$ is the adaptive-scale triplet loss ,$C_{orr} $ is the correlation penalty loss . The total loss is $T_{\left ( \delta _{+} , \delta _{-} \right )} + C_{orr}$.
+
+
+\subsection{Adaptive-Scale Sampling}
+ Reviewing our analysis of the reminder of scale $\xi $ , $\xi $ has a certain directive effect on the descriptor spatial scale problem. The smaller $\xi $ indicates unsuitable scale, so we should focus on these samples with smaller $\xi $ . The specific rules are as follows.
+  First of all , a batch $Z=\left \{ (a_{i} , p_{i}) \right \}_{i=1}^{N}$  of matching local patches is generated, $N$represents the size of a batch , $a_{i}$ stand for the anchor  samples and $p_{i}$ are the matching of $a_{i}$  . When $Z$ pass through the network , then we get the output $Y_{a} = [y_{a1},\cdots ,y_{am},\cdots ,y_{aN}]^{T}$ ,$Y_{p} = [y_{p1},\cdots ,y_{pm},\cdots ,y_{pN}]^{T}$. We calculate the $L2$ pairwise[8] distance matrix $D = \left [ d_{ij} \right ]_{N\times N} (1\leq i\leq N, 1\leq j\leq N)$.
+
+\begin{small} 
+\begin{equation} 
+d_{ij}=\sqrt{2 - 2y_{ai}2y_{pj}}\tag{14}
+\end{equation} 
+\end{small}
+ For each diagonal element$d_{ij}$, we calculate separately $\xi _{r}(m)=\frac{d_{im}}{d_{ii}}(1\leqslant m\leqslant N,m\neq i)$, $\xi _{r}(n)=\frac{d_{ni}}{d_{ii}}(1\leqslant n\leqslant N,n\neq i)$, and  $m_{0}=argmin(\xi_{r}(m))$, $n_{0}=argmin(\xi_{c}(n))$, so we can define a triplet sample :  
+ \begin{small} 
+\begin{flalign}
+Trip_{(i)}=\begin{cases}
+ (a_{i},p_{i},p_{m_{0}}) \text{ if } min(\xi _{r}(m)) <  min(\xi _{c}(n))  \\ 
+ (p_{i},a_{i},a_{n_{0}}) \text{ otherwise }
+ \end{cases}\tag{15}
+ \end{flalign} 
+\end{small}
+
+Eventually, we get a batch of triplet samples  $ S=\left \{ Trip(i) \right \}_{i}^{N}$.
+\subsection{Model And Phased Training}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.24]{figure5}
+\caption{An illustration of our  network architecture , which is identical to L2-Net[8] .}
+\end{figure}
+
+Our network architecture is shown in Fig. 5. The input of the model are the grayscale images which are also normalized. There are seven convolutional layers in the network model. Each convolutional layer is followed by ReLU non-linearity and BN (Batch normalization) operations except for the last convolutional layer. Before the last convolution layer, we added a drop out layer, mainly to prevent network overfitting. At the same time, we found that the dropout rate has a greater impact on the model. Here, we set the dropout rate to 0.3. The final output of the network is a normalized 128-dimensional feature vector.  
+When it comes to the network training, we use a novel phased training strategy.  Specifically, we set 10 epochs. In the first 6 epochs, we use $T_{(\delta _{+},\delta _{-})} + C_{orr}$ as the total loss function. In the last 4 epochs, we use the sum of $L_{margin}$ and $C_{orr}$. The main reason is that during the training process, we found that the entire training process takes a long time. At the same time, it can be seen from Fig. 4 (a) that when the loss value of $T_{(\delta _{+},\delta _{-})}$  is close to the optimal value, the gradient decreases sharply. Therefore, in the late training period, we replace $T_{(\delta _{+},\delta _{-})}$ with $L_{margin}$. On the one hand, we took advantage of the  ability of $L_{margin}$to speed up network training, and on the other hand, we solved the gradient disappearance problem of  $T_{(\delta _{+},\delta _{-})}$. The network is trained with steepest gradient descent with a momentum term of 0.9 and we set the learning rate 0.1 in the beginning. From our experimental results, using two kinds of losses in different stages can produce better results.
+
+\subsection{Descriptor Performance Evaluation}
+We evaluate our model on UBC benchmark dataset, which have three sets: Yosemite, Notredame, and Liberty with about 400k normalized 64x64 patches in each. According to standard rules, we train on one dataset and test on the other two. And our metric is the false positive rate (FPR) at point of 0.95 true positive recall. We compare popular hand-crafted and deep learning based descriptors following the same rules. Our results can be found in TABLE. I. From the data in the table, we can see that our network model has achieved good results. 
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Patch Verification Performance On UBC Phototour ,Our Best Results Are In BOLD , Methods With Suffix“+” Are Trained With Data Augmentation.}
+\label{table_example}
+\begin{center}
+\begin{tabular}{cccccccc}
+\toprule
+
+\hline
+\midrule
+\multirow{2}{*}{Suquences} & \multicolumn{1}{c}{Train} & \multicolumn{1}{c}{NOT} & \multicolumn{1}{c}{YOS}  & \multicolumn{1}{c}{LIB}  & \multicolumn{1}{c}{YOS}  & \multicolumn{1}{c}{LIB}   & \multicolumn{1}{c}{NOT}  \\
+  \cline{3-8}
+                                            & \multicolumn{1}{c}{Test}                                     & \multicolumn{2}{c}{LIB}                                                   & \multicolumn{2}{c}{NOT}                                         & \multicolumn{2}{c}{YOS}                       \\
+  \cline{1-8}
+\multirow{1}{*}{SIFT [3]}     & \multicolumn{1}{c}{ }                                         & \multicolumn{2}{c}{29.84}                                                 & \multicolumn{2}{c}{22.53}                                         & \multicolumn{2}{c}{27.29}  \\
+  \cline{3-8}
+\multirow{1}{*}{MatchNet [13]}   & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{6.9} & \multicolumn{1}{c}{10.77} & \multicolumn{1}{c}{3.87}  & \multicolumn{1}{c}{5.67}  & \multicolumn{1}{c}{10.88}  & \multicolumn{1}{c}{8.39}  \\
+  \cline{3-8}
+\multirow{1}{*}{T-Feat [18]} & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{7.22} & \multicolumn{1}{c}{9.53} & \multicolumn{1}{c}{3.12}  & \multicolumn{1}{c}{3.83}  & \multicolumn{1}{c}{7.82}  & \multicolumn{1}{c}{7.08}  \\
+  \cline{3-8}
+\multirow{1}{*}{[14]}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{4.55} & \multicolumn{1}{c}{7.40} & \multicolumn{1}{c}{2.01}  & \multicolumn{1}{c}{2.52}  & \multicolumn{1}{c}{4.75}  & \multicolumn{1}{c}{4.38}  \\
+  \cline{3-8}
+\multirow{1}{*}{L2Net+ [8]}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{2.36} & \multicolumn{1}{c}{4.7} & \multicolumn{1}{c}{0.72}  & \multicolumn{1}{c}{1.29}  & \multicolumn{1}{c}{2.57}  & \multicolumn{1}{c}{1.71}  \\
+  \cline{3-8}
+\multirow{1}{*}{HardNet+ [9]}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{2.28} & \multicolumn{1}{c}{3.25} & \multicolumn{1}{c}{0.57}  & \multicolumn{1}{c}{0.96}  & \multicolumn{1}{c}{2.13}  & \multicolumn{1}{c}{2.22}  \\
+  \cline{3-8}
+\multirow{1}{*}{CS-L2Net+ [8]}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{1.71} & \multicolumn{1}{c}{3.87} & \multicolumn{1}{c}{0.56}  & \multicolumn{1}{c}{1.09}  & \multicolumn{1}{c}{2.07}  & \multicolumn{1}{c}{1.30}  \\
+  \cline{3-8}
+\multirow{1}{*}{[22]}  & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{1.79} & \multicolumn{1}{c}{2.96} & \multicolumn{1}{c}{0.68}  & \multicolumn{1}{c}{1.02}  & \multicolumn{1}{c}{2.51}  & \multicolumn{1}{c}{1.64}  \\
+  \cline{3-8}
+\multirow{1}{*}{ASD}  & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{\textbf{1.43}} & \multicolumn{1}{c}{\textbf{2.60}} & \multicolumn{1}{c}{\textbf{0.53}}  & \multicolumn{1}{c}{\textbf{0.79}}  & \multicolumn{1}{c}{\textbf{1.99}}  & \multicolumn{1}{c}{1.70}  \\
+\bottomrule
+\hline
+\hline
+\toprule
+\end{tabular} 
+\end{center}
+\end{table}
+\subsection{Framework of ASD-SLAM}
+Unlike those end-to-end SLAM methods, we still use the traditional SLAM framework. In the field of monocular vis-ion, ORB-SLAM has the best effect in practical applications. So, we use our ASD descriptor to replace the front end of the traditional ORB-SLAM system to design our ASD-SLAM system framework. The overview of ASD-SLAM is shown in Figure. 6.      At the front end of the system, we detect FAST corners, and get a certain number of image patches around the position of each corner in the image, then, send each image patch to our deep learning network to get the corresponding features descriptor ASD for every single frame. At the beginning, the system performs monocular initialization through the data association of descriptors between adjacent frames, and under epipolar constraints. In the tracking thread, we use a uniform motion model to assist the matching of feature descriptors and generate suitable keyframes at the same time. After getting the keyframe, the 3D positions of the feature points are traingulated by matching with the previous keyframe to build a local map. For each valid 3D point in the local map, a descriptor is maintained for the matching of consecutive frames, loopclo-sing, and the relocalisation process. In addition, once a loop is detected, the system will perform sim3 optimization, and then perform global pose optimization to reduce the cumulative error of the entire process.
+ For loopclosing process, we adopt visual vocabulary method. We extracts a big set of ASD descriptors from training sets offline. Then , we train the vocabulary on DBOW.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{figure6}
+\caption{The system overview of our ASD-SLAM .}
+\end{figure}
+\section{EXPERIMENTAL RESULTS}
+In this section, we will present experiment results to demonstrate the effectiveness of ASD in practical SLAM systems and our ASD-SLAM has a better performance than  traditional SLAM system. Our experiment is divided into three parts:  matching performance in special scenarios, Evaluation using The KITTI odometry dataset. 
+
+\subsection{Matching Performance In Special Scenarios}
+Firstly, we compare the matching performance of our descriptors ASD to ORB which is used in ORB-SLAM system in a high repetition scenario like Figure 7(a).  In Figure 7(a), traditional visual SLAM systems often fail because of high mismatches caused by highly repetitive lines on the wall like ORB in (a) even if we can do RANSAC. However, with our ASD descriptors, we can easily eliminate mismatches with RANSAC. The reason is that there are far more correct matches than mismatches with ASD.
+Secondly, we test the matching performance of descriptors from different perspectives. We set three different perspectives, 20 degrees, 40 degrees, 60 degrees. In Figure 7(a), we can see that when the perspectives are 20 degrees, 40 degrees, ASD has more matches than ORB. When the perspectives are 60 degrees, ORB has no right matches , however, all of matches in ASD are right. From the above, it can be seen that ASD descriptors are highly robust in dealing with some challenging SLAM scenarios.
+
+\begin{figure}[htbp]
+\centering
+\subfigure[]{
+\begin{minipage}[t]{1\linewidth}
+\centering
+\includegraphics[scale=0.29]{figure7a}
+%\caption{fig1}
+\end{minipage}%
+}%
+\\
+\subfigure[]{
+\begin{minipage}[t]{1\linewidth}
+\centering
+\includegraphics[scale=0.31]{figure7b}
+%\caption{fig1}
+\end{minipage}%
+}%
+
+\caption{atching performance of  ASD in special scenarios. (a) shows the matching performance of ASD and ORB in in a high repetition scenario.  (b) identifies the matching performance of ASD and ORB under different perspective changes. We set three different perspectives, 20 degrees,  40 degrees,  60 degrees.} 
+\end{figure}
+
+\subsection{Evaluation Using The KITTI Odometry Dataset}
+To verify the effectiveness of our ASD-SLAM system, we perform performance evaluations on the KITTI odometry dataset. Firstly, we performed sim3 trajectory alignment to the ground truth to computed the RMSE position error over the aligned trajectory on all the sequences of the KITTI odometry dataset. The RMSE results are shown in TABLE II with the best results highlighted in bold.
+We compare ASD-SLAM with LDSO and ORB-SLAM2 and show the Absolute Trajectory Errors (ATEs) on all the sequences of the KITTI odometry dataset in TABLE II. We perform Sim (3) alignment to the groundtruth to calculate ATEs. At the same time, we use the method proposed by [48] to calculate the relative translation error statistics   As is shown in TABLE II, our method achieves comparable accuracy comparing to LDSO and ORB-SLAM2. Also in sequences 09, both LDSO and ORB-SLAM2 can not get loop closure in our tests, however, our ASD-SLAM can get loop closure normally.
+
+\begin{table}[h]
+
+\caption{The ATEs Of ORB-SLAM, LDSO And ASD-SLAM On All Of KITTI Odometry Dataset Sequences.}
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\hline
+\multirow{1}{*}{Suquences} & \multicolumn{1}{c}{ORB-SLAM} & \multicolumn{1}{c}{LDSO} & \multicolumn{1}{c}{ASD-SLAM} \\
+$00 $             &8.18                      & 13.80                    & \textbf{6.04}                   \\
+$01 $             &416.11                          &\textbf{12.14}                   & 208.16                   \\
+$02 $             &24.62                          & 22.60                    & \textbf{22.48}                   \\
+$03 $             &1.35                         & 2.92                    & \textbf{1.07}                   \\
+$04 $             &1.16                          &1.15                    & \textbf{0.84}                   \\
+$05 $             &6.09                          & 4.58                 & \textbf{3.40}                   \\
+$06 $             &10.26                          & 13.23                    & \textbf{7.76}                   \\
+$07 $             &2.80                          & 2.23                   & \textbf{1.59}                 \\
+$08 $             &56.52                         &128.68                   &\textbf{52.40}                   \\
+$09 $             &53.35                        & 76.37                   &\textbf{7.17}                  \\
+$10 $             &8.65                         &17.08                    & \textbf{7.15}                 \\
+\hline
+\hline
+\toprule
+\end{tabular} 
+\end{center}
+\end{table}
+
+\begin{figure}[htbp]
+\flushleft 
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\flushleft 
+\includegraphics[scale=0.7]{KITTI00}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.4\linewidth}
+\centering
+\includegraphics[scale=0.7]{KITTI05}
+%\caption{fig1}
+\end{minipage}%
+}%
+
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\flushleft 
+\includegraphics[scale=0.8]{KITTI07}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[scale=1]{KITTI}
+%\caption{fig1}
+\end{minipage}%
+}%
+
+\caption{An illustration of  aligned trajectories of Kitti sequence 00, 05 and 07. As can be seen from the green box in the figure, the trajectory estimated by ASD-SLAM is closer to ground truth.} 
+\end{figure}
+
+
+\begin{figure}[htbp]
+\flushleft 
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\flushleft 
+\includegraphics[scale=0.29]{KITTI00translation}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\flushleft
+\includegraphics[scale=0.29]{KITTI05translation}
+%\caption{fig1}
+\end{minipage}%
+}%
+
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\flushleft 
+\includegraphics[scale=0.29]{KITTI07translation}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[]{
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.5]{KITTItranslationshow}
+%\caption{fig1}
+\end{minipage}%
+}%
+
+\caption{Boxplot summarizing the relative translation error statistics with ASD-SLAM, ORB-SLAM and LDSO over sequence 00 , 05 and 07. We divide the whole trajectory into five segments to  calculate the relative translation error statistics by different ratios 0.1 ,0.2, 0.3, 0.4, 0.5. } 
+\end{figure}
+
+
+
+
+
+
+
+
+\subsection{Some Common Mistakes}
+\begin{itemize}
+
+
+
+\item In American English, commas, semi-/colons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
+
+\end{itemize}
+
+
+\section{USING THE TEMPLATE}
+
+Use this sample document as your LaTeX source file to create your document. Save this file as {\bf root.tex}. You have to make sure to use the cls file that came with this distribution. If you use a different style file, you cannot expect to get required margins. Note also that when you are creating your out PDF file, the source file is only part of the equation. {\it Your \TeX\ $\rightarrow$ PDF filter determines the output file size. Even if you make all the specifications to output a letter file in the source - if your filter is set to produce A4, you will only get A4 output. }
+
+It is impossible to account for all possible situation, one would encounter using \TeX. If you are using multiple \TeX\ files you must make sure that the ``MAIN`` source file is called root.tex - this is particularly important if your conference is using PaperPlaza's built in \TeX\ to PDF conversion tool.
+
+\subsection{Headings, etc}
+
+Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named Heading 1, Heading 2, Heading 3, and Heading 4 are prescribed.
+
+\subsection{Figures and Tables}
+
+Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation Fig. 1, even at the beginning of a sentence.
+
+
+\section{CONCLUSIONS}
+
+A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{APPENDIX}
+
+Appendixes should appear before the acknowledgment.
+
+\section*{ACKNOWLEDGMENT}
+
+The preferred spelling of the word acknowledgment in America is without an e after the g. Avoid the stilted expression, One of us (R. B. G.) thanks . . .  Instead, try R. B. G. thanks. Put sponsor acknowledgments in the unnumbered footnote on the first page.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{c1} G. O. Young, Synthetic structure of industrial plastics (Book style with paper title and editor), 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 1564.
+
+
+
+
+
+
+
+\end{thebibliography}
+
+
+
+
+\end{document}
