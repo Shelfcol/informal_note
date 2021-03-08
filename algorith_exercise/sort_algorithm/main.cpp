@@ -5,7 +5,7 @@ using namespace std;
 //https://zhuanlan.zhihu.com/p/41923298
 void bubble_sort(vector<int>& num_vec)
 {
-    //比较相邻数据，如果前面大于后面，则交换两个数据
+    //比较相邻数据，如果前面大于后面，则交换两个数据。每次循环就将最大一个数字放到最后
     for(unsigned int i=num_vec.size()-1;i>0;--i)
     {
         bool swap_flag=false;
@@ -47,7 +47,7 @@ void insertion_sort(vector<int>& num_vec)
         int j=i-1;
         for(;j>=0&&num_vec[j]>key;--j)
             num_vec[j+1]=num_vec[j];
-        num_vec[j+1]=key;
+        num_vec[j+1]=key;//！！！！j+1
     }
 }
 
