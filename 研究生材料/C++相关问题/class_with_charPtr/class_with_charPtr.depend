@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1615561105 source:c:\senior\master\informal_note\研究生材料\c++相关问题\class_with_charptr\main.cpp
+	<iostream>
+	<string>
+	<stdio.h>
+	<string.h>
+
