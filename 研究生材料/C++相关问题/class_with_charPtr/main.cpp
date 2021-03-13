@@ -9,15 +9,18 @@ class String
 {
 public:
     String(){num=0;};//必须要自定义
-    String(const char* cstr,int n=0);//构造函数???这个不是替代了默认构造函数？？？
+    String(const char* cstr,int n=0);//构造函数
     String(const String& str);//拷贝构造
     String& operator=(const String& str);//拷贝赋值
     String operator+(const String& str) const;//加法运算符
+    friend String operator+(int n,const String& str);//1+str，因为+的第一个参数不是String，所以只能定义为友元函数。
+                                                     //后面不能加const，因为const是修饰*this指针的，友元函数没有*this指针
     String operator-() const;//取反，一元运算符
     String& operator+=(const String& str);
     String operator++();//前缀运算符
     String operator++(int);//后缀运算符
-    friend std::ostream& operator<<(std::ostream& os,const String& str);//<<声明为友元，则可以cout<<str,否则需要str<<cout;很奇怪
+    explicit operator int() const;//将String对象强制转换成int，不能改变原来的对象值，也不能有返回类型，因为int已经指定了返回类型.explicit表示只能显示转换
+    friend ostream& operator<<(ostream& os,const String& str);//<<声明为友元，则可以cout<<str,否则需要str<<cout;很奇怪
     ~String(){delete [] m_data;}
     char* get_ctsr()const {return m_data;}
 private:
@@ -27,9 +30,19 @@ private:
 
 String::String(const char* cstr,int n)//构造函数
 {
-    m_data=new char[strlen(cstr)+1];//size_t strlen ( const char * str ); 返回字符串长度
-    strcpy(m_data,cstr);
-    num=n;
+    if(cstr==0)
+    {
+        m_data=new char[1];
+        m_data='\0';
+        num=n;
+    }
+    else
+    {
+        m_data=new char[strlen(cstr)+1];//size_t strlen ( const char * str ); 返回字符串长度
+        strcpy(m_data,cstr);
+        num=n;
+    }
+
 }
 String::String(const String& str)//拷贝构造
 {
@@ -68,11 +81,23 @@ String  String::operator+(const String& str) const
 {
     String sum;
     sum.num=num+str.num;
+    delete [] sum.m_data;
+    sum.m_data=new char [strlen(str.m_data)+strlen(m_data)+1];
+    strcpy(sum.m_data,m_data);
+    strcat(sum.m_data,str.m_data);//将后一个字符串吊到前一个后面
     /*
     String sum=str;////用拷贝构造函数？？？String sum不行？？？？？？？？？？？
     sum.num+=num;*/
     return sum;
 }
+
+String operator+(int n,const String& str) //友元函数，实现的时候不需要写friend，也不能加String::
+{
+    String tmp=str;
+    tmp.num=tmp.num+n;
+    return tmp;
+}
+
 //一元运算符，可以和二元运算符区分，因为特征标不同
 String String::operator-() const
 {
@@ -101,9 +126,14 @@ String String::operator++(int)//后缀运算符
     return tmp;
 }
 
+String::operator int() const//不能指定返回类型
+{
+    return num;
+}
+
 //返回一个引用是为了实现连续的cout<<x<<y。
 //cout<<Str将被转换为operator<<(cout,Str)
-std::ostream& operator<<(std::ostream& os,const String& str)
+ostream& operator<<(ostream& os,const String& str)
 {
     os<<"charptr= "<<str.m_data<<" ";
     os<<" num= "<<str.num<<endl;
@@ -131,9 +161,13 @@ int main()
     cout<<"s4= "<<s4<<endl;
     s4=++s1;
     cout<<"s4= "<<s4<<endl;
+    s4=9+s1;
+    cout<<"s4= "<<s4<<endl;
     s4+=s1;
     cout<<"s4= "<<s4<<endl;
     s4=-s1;
     cout<<"s4= "<<s4<<endl;
+    int s=int(s4);//s=s4是错误的，因为explicit只能显式转换
+    cout<<s;
     return 0;
 }
