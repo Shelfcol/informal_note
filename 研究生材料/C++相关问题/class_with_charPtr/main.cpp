@@ -122,7 +122,7 @@ String String::operator++()//前缀运算符
 String String::operator++(int)//后缀运算符
 {
     String tmp=*this;
-    ++*this;/////////
+    ++*this;
     return tmp;
 }
 
@@ -150,9 +150,10 @@ int main()
     cout<<"s1= "<<s1<<endl;
     String s2(cstr2,25);//构造
     cout<<"s2= "<<s2<<endl;
-    String s3(s1);//拷贝构造
+    String s3=s1;//拷贝构造。s3变量不存在，需要现在构造
+    //String s3(s1);//也可以
     cout<<"s3= "<<s3<<endl;
-    s3=s2;//拷贝赋值
+    s3=s2;//拷贝赋值，s3变量已经存在
     cout<<"s3= "<<s3<<endl;
     String s4=s1+s2;//加法
     //String s4=s2;//加法
