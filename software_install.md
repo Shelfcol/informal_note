@@ -342,7 +342,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		sudo apt-get install libspnav-dev
 
 45. there is no file  /dev/ttyUSB*:可能是设备或者线坏了
-46. ubuntu不能输入拼音：
+46. ubuntu不能输入拼音：https://blog.csdn.net/lupengCSDN/article/details/80279177?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&dist_request_id=1328769.69194.16176780383119303&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
 	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 
 47.doxygen:https://www.jianshu.com/p/4e4ce6d6c666
