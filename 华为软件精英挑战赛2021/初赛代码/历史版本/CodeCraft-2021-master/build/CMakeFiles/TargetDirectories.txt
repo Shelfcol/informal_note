@@ -1,0 +1,3 @@
+/mnt/d/Competition/2021HuaweiSoftware/CodeCraft-2021-master/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/Competition/2021HuaweiSoftware/CodeCraft-2021-master/build/CMakeFiles/edit_cache.dir
+/mnt/d/Competition/2021HuaweiSoftware/CodeCraft-2021-master/build/CMakeFiles/CodeCraft-2021.dir

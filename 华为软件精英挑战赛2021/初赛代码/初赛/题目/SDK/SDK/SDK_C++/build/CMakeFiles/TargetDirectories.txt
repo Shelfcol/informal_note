@@ -1,0 +1,3 @@
+/mnt/d/Competition/2021HuaweiSoftware/初赛/题目/SDK/SDK/SDK_C++/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/Competition/2021HuaweiSoftware/初赛/题目/SDK/SDK/SDK_C++/build/CMakeFiles/edit_cache.dir
+/mnt/d/Competition/2021HuaweiSoftware/初赛/题目/SDK/SDK/SDK_C++/build/CMakeFiles/CodeCraft-2021.dir
