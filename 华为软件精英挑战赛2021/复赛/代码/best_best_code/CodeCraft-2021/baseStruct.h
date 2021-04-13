@@ -222,14 +222,6 @@ bool serCmpLeftResDescFunc(serverEntity* a, serverEntity* b) {
     return a->A.core + a->B.core > b->A.core + b->B.core;
 }
 
-//满的排在前面,剩得少的在前
-bool serCmpLeftAbsolueResIncFunc(serverEntity* a, serverEntity* b) {
-    int aLeft=a->A.core+a->A.memory+a->B.core+a->B.memory;
-    int bLeft=b->A.core+b->A.memory+b->B.core+b->B.memory;
-    if(aLeft!=bLeft) return aLeft<bLeft;
-    return a<b;
-}
-
 enum reqType {ADD, DEL};
 struct requestInfo {
     string vmName; //ADD时需要用  改一下

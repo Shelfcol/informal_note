@@ -1448,113 +1448,6 @@ void moveVmDelTodayToBackForNode(vector<serverEntity*>& vecServerForNode,int& ma
 
 
 
-/*begin**************做了四次迁移之后将比较空的之间再做迁移**********************/
-
-
-//将后面的虚拟机迁移到前面去，migrate1NodeVm为true时迁移单节点vm，为false时迁移双节点vm
-void migrateVecServerForNodeNearlyEmptyForNodeVm(vector<serverEntity*>& vecServerForNodeNearlyEmpty, int& maxNodeServerMigrateTime, int isMigrateTwoNode, vector<intTriple>& migration) {
-    //将后面的vm往前面迁移
-    for(int right = vecServerForNodeNearlyEmpty.size() - 1; right >= 0 && maxNodeServerMigrateTime > 0; --right) {
-        serverEntity* ser = vecServerForNodeNearlyEmpty[right];
-
-        //map<serverEntity*,set<vmEntity*>> vmsInServers;//保存每个server对应的所有虚拟机，为了方便后续的迁移
-        set<vmEntity*>& vmSetOfServer = vmsInServers.find(ser)->second; //找到这个服务器上的所有虚拟机
-        vector<vmEntity*> vmsToBeDeleted;//保存待删除的迭代器
-        for(vmEntity* vm : vmSetOfServer) {
-            if(maxNodeServerMigrateTime <= 0) break; //表示迁移次数不够
-
-            if(vm->isTwoNode != isMigrateTwoNode) continue; //迁移的虚拟机与要求的vm不匹配
-
-            int vmServerTypeIndex = getRowOfvm2server(vm); //虚拟机对应的服务器种类的下标
-
-            for(int left = 0; left < right; ++left) {//不能迁移到右边服务器
-                serverEntity* newServer = vecServerForNodeNearlyEmpty[left];
-
-                //不会出现这种情况
-                // //!!跳过leastPriorityAddVmsServerForNode，非del的vm不能迁移到里面去
-                // if(leastPriorityAddVmsServerForNode.contains(newServer))
-                //     continue;
-
-                // 找到一个对应类型的服务器,根据虚拟机判断当前服务器是否同一类型
-                //返回虚拟机对应的服务器的下标
-                // if(newServer->serverName == chosenServers[0][vmServerTypeIndex].serverName)
-                {
-                    //虚拟机和服务器种类对应
-                    //判断是否装得下，如果装得下，且不是与原服务器同样的服务器，则进行原服务器资源的释放，新部署服务器资源的占用，将需要的输出信息保存到一个位置
-                    nodeType layPlace = canLayThisVm(newServer, vm);
-
-                    if(layPlace == type_D) { //双节点部署，则进行服务器的迁移
-                        //新服务器的资源的消耗，旧服务器资源的回收
-                        //迁移次数的增加
-                        maxNodeServerMigrateTime--;
-
-                        vmsInServers[newServer].insert(vm);
-                        vmsToBeDeleted.push_back(vm);//保存待转移的虚拟机迭代器
-
-                        vmRePlaced(vm, ser, newServer, layPlace);
-                        //migrate信息记录
-                        migration.emplace_back(vm->id, newServer->serverId, layPlace); //双节点
-
-                        break;//此虚拟机迁移成功，退出
-                    } else if(layPlace == type_A) { //部署在A节点
-                        //新服务器的资源的消耗，旧服务器资源的回收
-                        //迁移次数的增加
-                        maxNodeServerMigrateTime--;
-
-                        vmRePlaced(vm, ser, newServer, layPlace);
-
-                        vmsInServers[newServer].insert(vm);
-                        vmsToBeDeleted.push_back(vm);//保存待转移的虚拟机迭代器
-
-                        migration.emplace_back(vm->id, newServer->serverId, layPlace); //A节点
-                        break;//此虚拟机迁移成功，退出
-                    } else if (layPlace == type_B) { //部署在B节点
-                        //新服务器的资源的消耗，旧服务器资源的回收
-                        //迁移次数的增加
-                        maxNodeServerMigrateTime--;
-                        vmRePlaced(vm, ser, newServer, layPlace);
-                        vmsInServers[newServer].insert(vm);
-                        vmsToBeDeleted.push_back(vm);//保存待转移的虚拟机迭代器
-
-                        migration.emplace_back(vm->id, newServer->serverId, layPlace); //B节点
-                        break;//此虚拟机迁移成功，退出
-                    }
-
-                }
-            }
-        }
-        //删除
-        for(auto& vmIt : vmsToBeDeleted)
-            vmSetOfServer.erase(vmIt);
-    }
-
-}
-
-
-
-//将剩余率大于阈值但又不空，且不是leastPriorityAddVmsServerForNode的服务器单独拿出来，按照资源胜率量排序，剩得少的在前，
-//然后从后往前，先迁移单节点vm，再迁移双节点vm，这样可以消除一部分负载不均衡而剩了较多空间loadRatio=0.5
-void migrateLeftMoreSer(vector<serverEntity*>& vecServerForNode, int& maxNodeServerMigrateTime, vector<intTriple>& migration, double loadRatio) {
-    vector<serverEntity*> vecServerForNodeNearlyEmpty;
-    for(auto& ser : vecServerForNode) {
-        if(ser->leftResRatio > loadRatio && isEmptyOfServer(ser) != 0 && (!leastPriorityAddVmsServerForNode.contains(ser)))
-            vecServerForNodeNearlyEmpty.push_back(ser);
-    }
-
-    sort(vecServerForNodeNearlyEmpty.begin(), vecServerForNodeNearlyEmpty.end(), serCmpLeftAbsolueResIncFunc); //空间剩得少的在前
-    int isMigrateTwoNode = 0; //单节点
-    int migTimeFor1Node = maxNodeServerMigrateTime * 2.0 / 3.0;
-    maxNodeServerMigrateTime -= migTimeFor1Node;
-    migrateVecServerForNodeNearlyEmptyForNodeVm(vecServerForNodeNearlyEmpty, migTimeFor1Node, isMigrateTwoNode, migration);
-    isMigrateTwoNode = 1; //双节点
-    maxNodeServerMigrateTime += migTimeFor1Node;
-    migrateVecServerForNodeNearlyEmptyForNodeVm(vecServerForNodeNearlyEmpty, maxNodeServerMigrateTime, isMigrateTwoNode, migration);
-
-}
-
-
-/*end**************做了四次迁移之后将比较空的之间再做迁移**********************/
-
 
 
 
@@ -1581,6 +1474,10 @@ void migrate(vector<intTriple>& migration) {
 
     //迁移方式2
     // migrateFirstFitForSplitServerForNode(migrationTimeTmp, migration, serCmpLeftResIncFunc, 0.025);
+
+
+
+
 
 
     //迁移方式3
@@ -1641,7 +1538,7 @@ void migrate(vector<intTriple>& migration) {
 
     
     leastPriorityAddVmsServerForNode.sort(serCmpLeftResDescFunc);//将剩余率多的放在前面
-    //将
+
 
    //将两者加入
     migrationTimeToday = migrationTime - migrationTimeTmp;
