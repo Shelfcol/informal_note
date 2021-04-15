@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1618454831 source:c:\senior\master\informal_note\huawei1\1.cpp
+
+1618454821 source:c:\senior\master\informal_note\huawei1\main.cpp
+	<iostream>
+	<vector>
+

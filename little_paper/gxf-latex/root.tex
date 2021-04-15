@@ -71,7 +71,7 @@ $^{2}$Z. Wang is with Xiaopeng Motors, Guangzhou, China}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-The feature quality plays an important role in visual SLAM (Visual Simultaneous Localization and Mapping) based on feature matching, and becomes the bottleneck of positioning accuracy improvement. Now lots of hand-crafted descriptors like BRIEF and ORB don't work very well in complex scenarios. The Convolutional Neural Network is proved to have tremendous advantages on image feature extraction. In this paper, we design a CNN model to extract binary visual feature descriptor from image patches. Based on this deep feature descriptor, we design a monocular SLAM system, named BASD-SLAM, by replacing ORB descriptor in ORB-SLAM2. We also train visual Bag of Words to detect loop closure. Experiments show that our BASD achieves better results on the HPatches dataset and UBC benchmark. In the meantime, the BASD-SLAM system outperforms other current popular SLAM system on KITTI odometry dataset and Tartanair dataset.
+The feature quality plays an important role in visual SLAM (Visual Simultaneous Localization and Mapping) based on feature descriptor matching, and becomes the bottleneck of positioning accuracy improvement. Now lots of hand-crafted descriptors like BRIEF and ORB don't work very well in complex scenarios. The Convolutional Neural Network is proved to have tremendous advantages on image feature extraction. In this paper, we design a CNN model to extract binary visual feature descriptor from image patches. Based on this deep feature descriptor, we design a monocular SLAM system, named BASD-SLAM, by replacing ORB descriptor in ORB-SLAM2. We also train visual Bag of Words to detect loop closure. Experiments show that our BASD achieves better results on the HPatches dataset and UBC benchmark. In the meantime, the BASD-SLAM system outperforms other current popular SLAM system on KITTI odometry dataset and Tartanair dataset.
 
 \end{abstract}
 
@@ -79,13 +79,13 @@ The feature quality plays an important role in visual SLAM (Visual Simultaneous 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 
-Visual SLAM has got prosperous development in recent years. The result of feature matching in the keypoint-based vSLAM system depends on the descriptor quality. The traditional descriptors rely on the pixel-level match,and the match errpor will accumulate slowly, finally impact the pose estimation result. So improving the descriptor quality is of high significance.
+Visual SLAM has got prosperous development in recent years. The result of feature matching in the keypoint-based vSLAM system depends on the local descriptor quality. The traditional descriptors rely on the pixel-level match,and the match error will accumulate slowly, finally impact the pose estimation result. So improving the descriptor quality is of high significance.
 
 With the fast development of deep learning in recent years,  image proccessing based on DL has become more and more popular. And vast researches have proved the unparalleled advantages on image feature extraction and data association, which are the bottleneck of traditonal visual SLAM pipeline. As a result, lots of researchers are committed to apply deep learining to SLAM,and solve the bottleneck problems,like feature extraction and data association.
 
 There have tremendous researches indicate the application of deep learining in SLAM improving the accuracy of vSLAM. Many researchers take advantage of deep learing ,and substitute some modules in the traditional SLAM pipeline, such as feature matching, relocalization, and so on. Some also use high-level semantic information, which can help the SLAM relocalization, bundle adjustment, etc. And some end-to-end SLAM system  ,which generates pose estimation directly from pictures ,also achieve better results in specific scenarios.
 
-However, there are many problems on the application of deep learning in SLAM system. For example, end-to-end SLAM systems are dependent on specific scenarios, and generalization ability are not strong.Semantic SLAM cannot guarantee the  appearance of specific semantic information,like the chairs in SLAM++; While the extraction of low-level features does not take into account the scale problem[ASD-SLAM],which meks the descriptors such as hardnet not suitable for SLAM.
+However, there are many problems on the application of deep learning in SLAM system. For example, end-to-end SLAM systems are dependent on specific scenarios, and generalization ability are not strong.Semantic SLAM cannot guarantee the  appearance of specific semantic information,like the chairs in SLAM++; While the extraction of low-level features does not take into account the scale problem[ASD-SLAM],which makes the descriptors such as hardnet not suitable for SLAM.
 
 To address the limitation of above researches, we propose our local feature descriptor extraction neural network, whcih address the scale problem causing deep descriptor aren't suitable for SLAM. the propoesed descriptor shares same structure with ORB, so it can be  easyily implemented on popular SLAM framework.To achieve better efficiency, we binarize our descriptor,which can vastly speed up the descriptor matching process.We also train Bag-of-Words for our deep descriptor to realize loop closure. 
 
@@ -108,8 +108,9 @@ Second,
 
 \subsection{Deep learning enhanced SLAM}
 Deep learning is a powerful method to solve feature description and data association problems encountered in the traditional SLAM framework. 
+End-to-end SLAM almost abondons the traditional SLAM pipeline,especially the geometry application. [DeepVO] utilized RCNN network to obtain camera ego-motion. [Unsupervised Learning of Depth and Ego-Motion from Video] explored an unsupervised learning framework to estimate monocular depth and camera motion. They just used video data to train their network,which can be heful to network training.
 
-As can be seen from the above, triplet losses play an important role on feature descriptor learning and SLAM.
+As can be seen from the above, triplet losses play an important role on feature descriptor learning and SLAM. 
 
 
 
