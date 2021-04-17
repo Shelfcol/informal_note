@@ -107,7 +107,6 @@
 
 ​	
 
-
 11.vs2017安装完后再装2015：
 	只选择通用windows应用开发工具中的windows10 SDK（10.0.10586）
 	
@@ -124,6 +123,7 @@
 	rostopic list
 	rostopic echo /imu/data
 	
+
 	如果要修改imu的frame_id，则需要下载驱动包进行安装，再修改launch文件
 	安装好后的使用：
 		sudo chmod 777 /dev/ttyUSB*
@@ -342,7 +342,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		sudo apt-get install libspnav-dev
 
 45. there is no file  /dev/ttyUSB*:可能是设备或者线坏了
-46. ubuntu不能输入拼音：
+46. ubuntu不能输入拼音：https://blog.csdn.net/lupengCSDN/article/details/80279177?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&dist_request_id=1328769.69194.16176780383119303&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
 	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 
 47.doxygen:https://www.jianshu.com/p/4e4ce6d6c666
@@ -424,9 +424,9 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 ​		#删除原有的Python连接文件
 ​		sudo rm /usr/bin/python
 ​	
-		#建立指向Python3.X的连接
-		sudo ln -s /usr/bin/python3.5 /usr/bin/python
-	
+​		#建立指向Python3.X的连接
+​		sudo ln -s /usr/bin/python3.5 /usr/bin/python
+​	
 		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
 		PATH=/usr/bin:$PATH
 	
@@ -537,8 +537,8 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 
 
 ​	
-	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
-	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
+​	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+​	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
 <<<<<<< HEAD
 	https://pytorch.org/
 =======
@@ -554,3 +554,81 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 ​		添加规则，127.0.0.1   需要禁止的网址，比如:
 
 ​		127.0.0.1  www.baidu.com
+
+58. vscode使用leetcode：提示invalid- password：https://blog.csdn.net/Horace__liu/article/details/104017270
+
+59. protobuf安装教程：
+
+    ```
+    https://blog.csdn.net/luckytanggu/article/details/105977834
+    
+    # step1：安装相关依赖
+    $ sudo apt-get install autoconf automake libtool curl make g++ unzip
+    
+    # step2：下载protobuf2.6压缩包
+    $ wget https://github.com/protocolbuffers/protobuf/archive/v2.6.0.zip
+    
+    # step3：解压压缩包并进到解压后的文件夹
+    $ unzip v2.6.0.zip && cd protobuf-2.6.0
+    
+    # step4：由于被墙的原因，我们需要修改“autogen.sh”，修改后如下（24、25行替换22、23行）
+    $ vim autogen.sh
+     20 if test ! -e gtest; then
+     21   echo "Google Test not present.  Fetching gtest-1.5.0 from the web..."
+     22   # curl http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2 | tar jx
+     23   # mv gtest-1.5.0 gtest
+     24   curl -L https://github.com/google/googletest/archive/release-1.5.0.tar.gz | tar zx
+     25   mv googletest-release-1.5.0 gtest
+     26 fi
+    
+    # step5：执行“autogen.sh”（执行后会生成“configure”文件）
+    $ sh autogen.sh
+    
+    # step6：执行“configure”，指定安装到“/opt/protobuf2”目录下
+    $ ./configure --prefix=/opt/protobuf2
+    
+    # step7：安装
+    $ make && make install
+    
+    # step8：通过ln软连接或者环境变量添加“protoc”命令（安装完后protoc命令路径在/opt/protobuf2/bin/protoc）
+    # ln软连接方式
+    $ ln -s /opt/protobuf2/bin/protoc /usr/local/bin/protoc
+    
+    # 环境变量方式
+    $ vim ~/.bashrc
+    export PROTOC=/opt/protobuf2
+    export PATH=$PATH:$PROTOC/bin
+    
+    $ source ~/.bashrc
+    
+    # step9：Protobuf是C++语言开发的，官方的protoc编译器中并不支持Go语言，需要安装插件才能生成Go代码
+    #$  go get github.com/golang/protobuf/protoc-gen-go
+    
+    
+    验证：
+    # step1：创建一个proto文件
+    $ vim test.proto
+    message Foo {}
+    
+    # step2：生成go代码
+    $ protoc --cpp_out=./ test.proto
+    
+    # 执行成功后会看到“test.pb.cc  test.pb.h ”文件
+    ```
+
+    protobuf使用：https://zhuanlan.zhihu.com/p/88544689
+
+    https://blog.csdn.net/liuxiaodong400/article/details/89496567
+
+    
+
+    开始一直显示protoc --version:  protobuf3，后面将catkin_ws里面的devel全部删除之后显示链接不到protoc。然后就是修改FindProtobuf.cmake
+
+    protobuf重新安装之后，需要更改 FindProtobuf.cmake里面的
+
+    ```
+    set(Protobuf_INCLUDE_DIR "/opt/protobuf2/include")
+    set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf2/bin/protoc")
+    ```
+
+​       
