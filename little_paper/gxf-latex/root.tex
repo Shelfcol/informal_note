@@ -107,8 +107,8 @@ First,
 Second, 
 
 \subsection{Deep learning enhanced SLAM}
-Deep learning is a powerful method to solve feature description and data association problems encountered in the traditional SLAM framework. 
-End-to-end SLAM almost abondons the traditional SLAM pipeline,especially the geometry application. [DeepVO] utilized RCNN network to obtain camera ego-motion. [Unsupervised Learning of Depth and Ego-Motion from Video] explored an unsupervised learning framework to estimate monocular depth and camera motion. They just used video data to train their network,which can be heful to network training.
+Deep learning is a powerful method to solve feature extraction and data association problems encountered in the traditional SLAM framework. 
+DeepVO abandoned traditional SLAM pipeline, and proposed a novel compact end-to-end SLAM system using recurrent convolutional neural networks,which could directly infer camera poses from raw RGB images(videos) .They firstly adopted RNNs to model sequential learning,and achieved better results on KITTI datasets. [Unsupervised Learning of Depth and Ego-Motion from Video] explored an unsupervised learning framework,which consisted of two CNNs to infer depth and pose respectively, to estimate monocular depth and camera motion simultaneously. They just used video data to train their network,which can be heful to network training.[DeMoN] proposed multiple encoder-decoder convolutional neural networks to estimate depth and ego-motion from two successive images.It learned matching concept from training.Althought end-to-end SLAM makes SLAM system more compact, it lacks of model generalization ability.
 
 As can be seen from the above, triplet losses play an important role on feature descriptor learning and SLAM. 
 
