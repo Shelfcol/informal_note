@@ -105,6 +105,16 @@ BRIEF chose $n_{d}$ pixel pairs in some specific sampling ways in smoothed image
 Based on BRIEF, ORB achieved rotation inviariance by calculating principal direction of image patches,and rotating image patches to same direction. ORB also was inviariant to scale change by image pyramid application.
 There also exsited many learned descriptors based on these traditional descriptor like PCA-SIFT,BinBoost, RMGD ,etc,which improve the real-time performance by mapping high-dimensional space to low-dimensional space. 
 
+In recent years,deep learning shines in image process,so many researches apply Deep learning to descriptor generation ,and these learning descriptor are more robust to transformations like illumination or viewpoint change .In order to pursue the accuracy and robustness of image matching, many researches proposed float deep learning local descriptor.
+[SuperPoint] presented and end-to-end fully-convolutional network to jointly detect interesting point and  generate descriptor on full-sized images according to Homographic Adaptation on the dataset.
+[MatchNet] utilized  siamese network to extract feature descriptor and processed metric learning followed by a fully-connected network.
+[L2-Net] proposed a leadrning descriptor which could be matched through $L_{2}$ distance ,genrated by a CNN model without metric learning layer. They used a novel sampling strategy to obtain much more training samples in few training epochs.
+[HardNet] presented a metirc learning loss,which maximized the distance between positive and negative example in one batch.This method worked very well in shallow network structure,which showed the advantage on complex regularization method.
+
+In order to compensate for the slow matching speed and large calculation cost of float learning descriptor, many researches are devoted to exploring the binarization method of float descriptor.
+[Deep  multi-quantization network] utilized K-Autoencoders baed on metric learning to realize binarization,which jointly optimized the parameters of feature extraction and  binarization.But the deep network structure  decided  real-time performance not very good. 
+[Learning to Hash  with DBNN] proposed a supervised and unsupervised binarization hashing deep learning model,which consited of a hidden layer to directly output binarization codes. This method abandoned sign or step function to binarize descriptor, but caused the training process much more complex. 
+[CDBin] just added sign function in the loss function to realize binarization, which was very direct and efficient.
 
 \subsection{Deep learning enhanced SLAM}
 Deep learning is a powerful method to solve feature extraction and data association problems encountered in the traditional SLAM framework. 
