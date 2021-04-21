@@ -1,5 +1,5 @@
-mkdir -p ~/catkin_ws_hailuo/src
-cd ~/catkin_ws_hailuo/src
+mkdir -p ~/catkin_ws_sc/src
+cd ~/catkin_ws_sc/src
 catkin_init_workspace
-cd ~/catkin_ws_hailuo/
+cd ~/catkin_ws_sc/
 catkin_make

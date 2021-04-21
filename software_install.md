@@ -81,7 +81,7 @@
 	Technical Information:
 	code:00000A00/0B1A, info:0000000000135
 	XINPUT1_ 3.dll
-
+	
 	解决：下载DirectX修复工具http://www.onlinedown.net/soft/120082.htm
 
 8.SolidWorks2018安装：
@@ -92,6 +92,7 @@
 
 10.安装google的cartographer：
 	https://google-cartographer-ros.readthedocs.io/en/latest/demos.html
+	https://blog.csdn.net/qq_26482237/article/details/92676267  两者辅助
         巨坑：开始自己装了一个pcl-1.9,就报各自pcl的time_h找不到之类查不到的错误，还有boost，我怀疑是pcl太新，导致与boost等库不兼容，以及与cartographer不兼容，联想到ros里面预装了一个pcl-1.7,所以我就将pcl-1.9卸载，然后再重新按照网址安装cartographer（需要执行所有步骤），就成功，所以不要装其他的pcl，ros自带的就OK
         https://blog.csdn.net/qq_26482237/article/details/92676267   change ceres-solver location
 
@@ -103,8 +104,8 @@
 	  /home/gxf/.local/lib/python2.7/site-packages/cmake/data/share/cmake-3.18/Modules/FindProtobuf.cmake:626 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
 	  CMakeLists.txt:35 (find_package)
 
-	
 
+​	
 
 11.vs2017安装完后再装2015：
 	只选择通用windows应用开发工具中的windows10 SDK（10.0.10586）
@@ -122,6 +123,7 @@
 	rostopic list
 	rostopic echo /imu/data
 	
+
 	如果要修改imu的frame_id，则需要下载驱动包进行安装，再修改launch文件
 	安装好后的使用：
 		sudo chmod 777 /dev/ttyUSB*
@@ -174,9 +176,9 @@ sudo cp /usr/local/cuda-10.0/lib64/libcudart.so.10.0 /usr/local/lib/libcudart.so
 sudo cp /usr/local/cuda-10.0/lib64/libcublas.so.10.0 /usr/local/lib/libcublas.so.10.0 && sudo ldconfig
 sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so.10.0 && sudo ldconfig
 
-	
+
 	https://developer.nvidia.com/cuda-toolkit-archive，可以下载旧版本的CUDA
-	
+
 20.yolov3配置：
 	https://blog.csdn.net/qq_36327203/article/details/84305303
 	
@@ -222,7 +224,7 @@ sudo cp /usr/local/cuda-10.0/lib64/libcurand.so.10.0 /usr/local/lib/libcurand.so
 33.jupyter 转python： jupyter nbconvert --to script xxx.ipynb
 
 34. Could not find a package configuration file provided by "tf2_sensor_msgs"
-  with any of the following names:
+    with any of the following names:
 
     tf2_sensor_msgsConfig.cmake
     tf2_sensor_msgs-config.cmake
@@ -242,7 +244,8 @@ Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
 	然后开机之后unlock那里有个齿轮,选择gdm
 
 37.编译ros问题:https://www.pianshen.com/article/7654723641/
-38.pytorch install:https://pytorch.org/get-started/previous-versions/
+38.pytorch c++使用：https://pytorch.org/cppdocs/installing.html
+	pytorch install:https://pytorch.org/get-started/previous-versions/
 <<<<<<< HEAD
 		ImportError: No module named machinery：换python3
 		当我安装了python3.7后，也将软链接python3生成到/usr/bin/python37,然后我执行python37 ./tools/build_libtorch.py，然后说我没有yaml文件，然后pip37 install PyYAML，说permission denied，因为我的python3.7是在usr里面的，所以sudo pip37 install PyYAML
@@ -339,7 +342,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		sudo apt-get install libspnav-dev
 
 45. there is no file  /dev/ttyUSB*:可能是设备或者线坏了
-46. ubuntu不能输入拼音：
+46. ubuntu不能输入拼音：https://blog.csdn.net/lupengCSDN/article/details/80279177?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&dist_request_id=1328769.69194.16176780383119303&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
 	system setting->language setting ,将ibus改成fcitx，然后将菜单和窗口的语言中中文左键点到前面，然后重启
 
 47.doxygen:https://www.jianshu.com/p/4e4ce6d6c666
@@ -354,18 +357,19 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	    FILE_PATTERNS = *.c *.cpp *.h *.hpp，指定各种文件，我们常用为*.cpp *.c *.h，等等。
 	    EXTRACT_PRIVATE = YES，显示类的私有成员变量和函数。
 	    RECURSIVE=YES，生成子目录的注释文件
-	    
-	    
-	    /*********************************/
-	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
-	    DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
-	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
-	    PROJECT_NUMBER = “1.0 beta”，项目版本号。
-	    IMAGE_PATH = image_dir，指定图片存放的目录，我们将图片放到当前目录下的image_dir目录中，因为我们的文档会出现测试图片示例。
-	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
-	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
-	   (2)生成注释文件：doxygen doxyconfig
-	   
+
+
+​	    
+​	    /*********************************/
+​	    OUTPUT_LANGUAGE = English，文档语言，可以指定为Chinese。
+​	    DOXYFILE_ENCODING = UTF-8，默认编码为UTF-8，这样可以支持中文。
+​	    INPUT = xxx，代码文件或目录，多个文件(目录)需要以空格隔开，如果不指定，表示当前目录，但是，如果指定目录且当前目录有代码文件的话，需要使用点号(“.”).表示当前目录。
+​	    PROJECT_NUMBER = “1.0 beta”，项目版本号。
+​	    IMAGE_PATH = image_dir，指定图片存放的目录，我们将图片放到当前目录下的image_dir目录中，因为我们的文档会出现测试图片示例。
+​	    HTML_OUTPUT= . ，html输出目录名称，默认为html目录，如果为“.”则表明为上述OUTPUT_DIRECTORY目录。
+​	    GENERATE_LATEX = NO，是否生成LaTeX，默认生成的，但我们不想生成。
+​	   (2)生成注释文件：doxygen doxyconfig
+
 47.Python3.7 源码安装 必须cd /usr/src
 
 	https://developer.aliyun.com/article/675910	
@@ -375,15 +379,15 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 	cd /usr/src
 	sudo wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
-
+	
 	sudo tar xzf Python-3.7.0.tgz
-
+	
 	cd Python-3.7.0
 	sudo ./configure --enable-optimizations
 	sudo make altinstall
-
+	
 	make altinstall用于防止替换默认的python二进制文件/ usr / bin / python
-
+	
 	python3.7 -V
 
 
@@ -393,7 +397,7 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     依据本文作者的路径创建新的软链接
     sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37   #查看一下python37安装的位置，将路径修改一下
     sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
-
+    
     4.最后查看Python3和pip3版本
     python37 -V
     pip37 -V
@@ -402,44 +406,47 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     	不要将python默认版本改为python37！！！！！！！！！！！！！！！！！！！！！！！！！不然会出很多问题，终端打不开，不能更新
     	Ubuntu 16.04 卸载自带 Python3 引发的惨案   https://blog.csdn.net/sinat_38682860/article/details/103276156
     	# 添加 python37 的软链接
-		sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37
-		# 添加 pip3 的软链接（这样pip3就是python3.7专用的，也可以起名为 pip37，不影响python3.5的pip3）
-		sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
-			
-			
-			
-			
-		!!!!!!!错误：将ubuntu默认版本改为python37：
-		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
-		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
-		
-		
-		python2.X修改为python3.X
-		#删除原有的Python连接文件
-		sudo rm /usr/bin/python
+    	sudo ln -s /usr/local/bin/python3.7 /usr/bin/python37
+    	# 添加 pip3 的软链接（这样pip3就是python3.7专用的，也可以起名为 pip37，不影响python3.5的pip3）
+    	sudo ln -s /usr/local/bin/pip3.7 /usr/bin/pip37
 
-		#建立指向Python3.X的连接
-		sudo ln -s /usr/bin/python3.5 /usr/bin/python
 
+​			
+​			
+​			
+​		!!!!!!!错误：将ubuntu默认版本改为python37：
+​		!!!!!!!sudo rm /usr/bin/python3  删除原本的软链接，我们可以发现这个文件上面有一个箭头
+​		!!!!!!!sudo ln -s /usr/local/bin/python3.7 /usr/bin/python3  链接3.7到python3
+
+
+​		
+​		python2.X修改为python3.X
+​		#删除原有的Python连接文件
+​		sudo rm /usr/bin/python
+​	
+​		#建立指向Python3.X的连接
+​		sudo ln -s /usr/bin/python3.5 /usr/bin/python
+​	
 		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
 		PATH=/usr/bin:$PATH
-
+	
 		#验证，命令行输入python，就会输出新的版本。
 		python
-
+	
 			python3.X还原为python2.X
-
+	
 		#删除原有的Python连接文件
 		sudo rm /usr/bin/python
-
+	
 		#建立指向Python2.X的连接
 		sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
-		
-    
-	ModuleNotFoundError: No module named '_ctypes' 解决记录
-		https://www.cnblogs.com/abeen/p/9355389.html
-	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
+
+​		
+​    
+​	ModuleNotFoundError: No module named '_ctypes' 解决记录
+​		https://www.cnblogs.com/abeen/p/9355389.html
+​	    #删官方原版软连接一时爽，撤回火葬场。遇到了报错ModuleNotFoundError: No module named 'CommandNotFound'
 
 
 48.jsom安装：https://wiki.openstreetmap.org/wiki/JOSM/Linux
@@ -460,7 +467,9 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 	QFactoryLoader::QFactoryLoader() checking directory path "/usr/local/bin/platforms" ...
 		Cannot load library /usr/local/lib/python3.7/site-packages/PyQt5/Qt/plugins/platforms/libqxcb.so: (libxcb-xinerama.so.0: 无法打开共享对象文件: 没有那个文件或目录)
 		sudo apt-get  install libxcb-xinerama0
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 
 54.geographic安装使用：sudo apt-get install libgeographic-dev的不能使用，会找不到安装包，需要下载源码安装，并且下载源码原cmake3.5安装后使用会报错，
 	CMake Error at /usr/local/lib/cmake/GeographicLib/geographiclib-config-version.cmake:38 (elseif):
@@ -469,3 +478,168 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
     "MSVC" "AND" "NOT" "(" "MSVC_TOOLSET_VERSION" "GREATER_EQUAL" "0" "AND" "MSVC_TOOLSET_MAJOR" "EQUAL" "0" ")
    更新cmake3.7：https://blog.csdn.net/li872149120/article/details/77892127
 	
+=======
+52.rosdep update :rosdep update urlopen error [Errno 111] Connection refused>
+https://blog.csdn.net/mrh1714348719/article/details/103803110
+=======
+52.windows cuda cudnn安装：https://blog.csdn.net/SpadgerZ/article/details/89454247（cuda安装直接选择第一项，然后用默认的安装）
+>>>>>>> fdf427b1eb984e93b162ec4083e23f2dfe8a75bf
+
+53.无法连接NVIDIA驱动：NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver
+	https://blog.csdn.net/hangzuxi8764/article/details/86572093
+	sudo apt-get install dkms
+	sudo dkms install -m nvidia -v 418.56
+	注意自己安装的驱动版本号得对应
+
+54.libtorch的cuda10.0的下载地址:这个是ABI=0对应的版本，用不了
+	windows：
+	https://download.pytorch.org/libtorch/cu100/libtorch-win-shared-with-deps-1.2.0.zip
+
+	linux：
+	https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-1.2.0.zip
+
+55.ORB-SLAM2引用torch的方法：
+	c++使用pytorch的时候只需要下载对应的libtorch，然后根据官网上的c++ example（https://pytorch.org/tutorials/advanced/cpp_export.html）用几个命令即可在CMakeLists.txt中链接上。
+	当将pytorch写入CMakeLists.txt之后，发现pangolin，DBoW3的为未定义的引用，原本这些库都是没有问题的，所以明显是torch的问题。是因为我下载的Libtorch 的 cxx11 ABI =0,而其他库编译的ABI=1，所以需要寻找相应的libtorch
+	https://github.com/pytorch/pytorch/issues/17492
+
+	Libtorch with cxx11 ABI are now available for download:
+	
+	v1.2.0:
+	
+	CPU:
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+	
+	CUDA 9.2:
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu92/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+	
+	CUDA 10.0:
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-shared-without-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-with-deps-1.2.0.zip
+	https://download.pytorch.org/libtorch/cu100/libtorch-cxx11-abi-static-without-deps-1.2.0.zip
+	
+	Nightly builds:
+	
+	CPU:
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cpu/libtorch-cxx11-abi-static-without-deps-latest.zip
+	
+	CUDA 9.2:
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu92/libtorch-cxx11-abi-static-without-deps-latest.zip
+	
+	CUDA 10.0:
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-shared-without-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-with-deps-latest.zip
+	https://download.pytorch.org/libtorch/nightly/cu100/libtorch-cxx11-abi-static-without-deps-latest.zip
+
+
+​	
+​	最后我下载的版本是libtorch-cxx11-abi-shared-with-deps-1.2.0.zip
+​	将libtorch下载完成后，重新链接此库，然后将ORBSLAM2的build文件夹删干净，然后重新编译
+<<<<<<< HEAD
+	https://pytorch.org/
+=======
+
+56.源码阅读软件understand安装：https://m.jb51.net/softs/633733.html
+>>>>>>> 18eb97673cb1f804b44277608cc01042aa8b2119
+
+57.google浏览器屏蔽特定网站：https://blog.csdn.net/oLevin/article/details/50352485
+
+​      	需要在Hosts文件中添加规则
+​     	以管理员身份运行【记事本】
+​		打开C:\system32\drivers\etc\hosts
+​		添加规则，127.0.0.1   需要禁止的网址，比如:
+
+​		127.0.0.1  www.baidu.com
+
+58. vscode使用leetcode：提示invalid- password：https://blog.csdn.net/Horace__liu/article/details/104017270
+
+59. protobuf安装教程：
+
+    ```
+    https://blog.csdn.net/luckytanggu/article/details/105977834
+    
+    # step1：安装相关依赖
+    $ sudo apt-get install autoconf automake libtool curl make g++ unzip
+    
+    # step2：下载protobuf2.6压缩包
+    $ wget https://github.com/protocolbuffers/protobuf/archive/v2.6.0.zip
+    
+    # step3：解压压缩包并进到解压后的文件夹
+    $ unzip v2.6.0.zip && cd protobuf-2.6.0
+    
+    # step4：由于被墙的原因，我们需要修改“autogen.sh”，修改后如下（24、25行替换22、23行）
+    $ vim autogen.sh
+     20 if test ! -e gtest; then
+     21   echo "Google Test not present.  Fetching gtest-1.5.0 from the web..."
+     22   # curl http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2 | tar jx
+     23   # mv gtest-1.5.0 gtest
+     24   curl -L https://github.com/google/googletest/archive/release-1.5.0.tar.gz | tar zx
+     25   mv googletest-release-1.5.0 gtest
+     26 fi
+    
+    # step5：执行“autogen.sh”（执行后会生成“configure”文件）
+    $ sh autogen.sh
+    
+    # step6：执行“configure”，指定安装到“/opt/protobuf2”目录下
+    $ ./configure --prefix=/opt/protobuf2
+    
+    # step7：安装
+    $ make && make install
+    
+    # step8：通过ln软连接或者环境变量添加“protoc”命令（安装完后protoc命令路径在/opt/protobuf2/bin/protoc）
+    # ln软连接方式
+    $ ln -s /opt/protobuf2/bin/protoc /usr/local/bin/protoc
+    
+    # 环境变量方式
+    $ vim ~/.bashrc
+    export PROTOC=/opt/protobuf2
+    export PATH=$PATH:$PROTOC/bin
+    
+    $ source ~/.bashrc
+    
+    # step9：Protobuf是C++语言开发的，官方的protoc编译器中并不支持Go语言，需要安装插件才能生成Go代码
+    #$  go get github.com/golang/protobuf/protoc-gen-go
+    
+    
+    验证：
+    # step1：创建一个proto文件
+    $ vim test.proto
+    message Foo {}
+    
+    # step2：生成go代码
+    $ protoc --cpp_out=./ test.proto
+    
+    # 执行成功后会看到“test.pb.cc  test.pb.h ”文件
+    ```
+
+    protobuf使用：https://zhuanlan.zhihu.com/p/88544689
+
+    https://blog.csdn.net/liuxiaodong400/article/details/89496567
+
+    
+
+    开始一直显示protoc --version:  protobuf3，后面将catkin_ws里面的devel全部删除之后显示链接不到protoc。然后就是修改FindProtobuf.cmake
+
+    protobuf重新安装之后，需要更改 FindProtobuf.cmake里面的
+
+    ```
+    set(Protobuf_INCLUDE_DIR "/opt/protobuf2/include")
+    set(Protobuf_PROTOC_EXECUTABLE "/opt/protobuf2/bin/protoc")
+    ```
+
+​       
+>>>>>>> faf225b023762212a50820bbedab76f84a118dff

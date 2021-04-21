@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/d/Competition/2021HuaweiSoftware/测试2/CodeCraft-2021/CodeCraft-2021.cpp
+algorithm
+-
+assert.h
+-
+climits
+-
+iostream
+-
+map
+-
+string
+-
+unordered_map
+-
+vector
+-
+

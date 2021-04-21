@@ -1,0 +1,85 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {I}INTRODUCTION}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}RELATED WORK}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-A}Local Feature Descriptor Learning}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-B}Visual Slam With CNN}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}METHODOLOGY}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}The Influence Of Scale Uncertainty In Triplet Losses On SLAM }{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces An illustration of monocular SLAM problem. The feature $ f_{1}$ generally observed in sucessive frames$\left ( X_{1},X_{2},X_{3} \right )$ , $X_{5}$ and is then triangulated as a map point in the map.\relax }}{3}{figure.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  The descriptors sets of feature $ f_{1}$ (blue), $ f_{2}$ (orange) are illustrated in a three-dimensional descriptor space. (a) is the ideal situation for SLAM, (b) has a larger divergence of two descriptors set. However, we can keep the $ \rho _{sub}$ between (a) and (b) same.\relax }}{3}{figure.caption.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  An illustration of $\rho _{sub}\left ( \delta _{+} , \delta _{-} \right ) $ and $\rho _{sub}^{2}\left ( \delta _{+}^{2} , \delta _{-}^{2} \right ) $. \relax }}{3}{figure.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Adaptive-Scale Triplet Loss }{4}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces An illustration of loss functions (left) and the sum of the squares of the derivative values corresponding to each loss function(right), $diff = \sqrt  [2]{\frac  {\partial L}{\partial \delta _{+}}^{2} + \frac  {\partial L}{\partial \delta _{-}}^{2}}$, the green line is the set of points corresponding to the same loss value, (a) and (b) are the loss functions of (12) and (9), (c) corresponds to the traditional triplet loss with a const scale, $L_{margin} = \delta _{+} - \delta _{-} + a_{const}.$ \relax }}{5}{figure.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Adaptive-Scale Sampling}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}Model And Phased Training}{5}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces An illustration of our network architecture , which is identical to L2-Net[6].\relax }}{5}{figure.caption.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-E}Descriptor Performance Evaluation}{5}{subsection.3.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Patch Verification Performance On UBC Phototour ,Our Best Results Are In BOLD , Methods With Suffix“+” Are Trained With Data Augmentation.\relax }}{6}{table.caption.11}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{table_example}{{I}{6}{Patch Verification Performance On UBC Phototour ,Our Best Results Are In BOLD , Methods With Suffix“+” Are Trained With Data Augmentation.\relax }{table.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-F}Framework of ASD-SLAM}{6}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}EXPERIMENTAL RESULTS}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Matching Performance In Special Scenarios}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The system overview of our ASD-SLAM.\relax }}{6}{figure.caption.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Evaluation Using The KITTI Odometry Dataset}{6}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Matching performance of ASD in special scenarios. (a) shows the matching performance of ASD and ORB in a high repetition scenario. (b) identifies the matching performance of ASD and ORB under different perspective changes. We set three different perspectives, 20 degrees, 40 degrees, 60 degrees.\relax }}{7}{figure.caption.13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces An illustration of aligned trajectories of KITTI sequence 00, 05 and 07. As can be seen from the green box in the figure, the trajectories estimated by ASD-SLAM are closer to ground truth.\relax }}{7}{figure.caption.14}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces The ATEs Of ORB-SLAM, LDSO And ASD-SLAM On All Of KITTI Odometry Dataset Sequences.\relax }}{7}{table.caption.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Boxplot summarizing the relative translation error statistics with ASD-SLAM, ORB-SLAM and LDSO over sequences 00, 05 and 07. We divide the whole trajectory into five segments to calculate the relative translation error statistics by different ratios 0.1, 0.2, 0.3, 0.4, 0.5. \relax }}{7}{figure.caption.15}\protected@file@percent }
+\bibcite{c1}{1}
+\bibcite{c2}{2}
+\bibcite{c3}{3}
+\bibcite{c4}{4}
+\bibcite{c5}{5}
+\bibcite{c6}{6}
+\bibcite{c7}{7}
+\bibcite{c8}{8}
+\bibcite{c9}{9}
+\bibcite{c10}{10}
+\bibcite{c11}{11}
+\bibcite{c12}{12}
+\bibcite{c13}{13}
+\bibcite{c14}{14}
+\bibcite{c15}{15}
+\bibcite{c16}{16}
+\bibcite{c17}{17}
+\bibcite{c18}{18}
+\bibcite{c19}{19}
+\bibcite{c20}{20}
+\bibcite{c21}{21}
+\bibcite{c22}{22}
+\bibcite{c23}{23}
+\bibcite{c24}{24}
+\bibcite{c25}{25}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  An illustration of reconstructed map of seq. 00. In this map, the green line is the trajectory and the blue lines represent the observations in each keyframe.\relax }}{8}{figure.caption.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}CONCLUSIONS}{8}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.19}\protected@file@percent }
+\bibcite{c26}{26}
+\bibcite{c27}{27}
+\bibcite{c28}{28}
+\bibcite{c29}{29}
+\bibcite{c30}{30}
+\bibcite{c31}{31}
+\bibcite{c32}{32}
+\bibcite{c33}{33}
+\bibcite{c34}{34}
+\bibcite{c35}{35}
+\bibcite{c36}{36}
+\gdef \@abspage@last{9}
