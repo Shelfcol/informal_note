@@ -461,4 +461,11 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 		Cannot load library /usr/local/lib/python3.7/site-packages/PyQt5/Qt/plugins/platforms/libqxcb.so: (libxcb-xinerama.so.0: 无法打开共享对象文件: 没有那个文件或目录)
 		sudo apt-get  install libxcb-xinerama0
 
-	  
+
+54.geographic安装使用：sudo apt-get install libgeographic-dev的不能使用，会找不到安装包，需要下载源码安装，并且下载源码原cmake3.5安装后使用会报错，
+	CMake Error at /usr/local/lib/cmake/GeographicLib/geographiclib-config-version.cmake:38 (elseif):
+  given arguments:
+
+    "MSVC" "AND" "NOT" "(" "MSVC_TOOLSET_VERSION" "GREATER_EQUAL" "0" "AND" "MSVC_TOOLSET_MAJOR" "EQUAL" "0" ")
+   更新cmake3.7：https://blog.csdn.net/li872149120/article/details/77892127
+	

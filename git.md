@@ -1,6 +1,8 @@
 #最开始的时候
 git init #初始化仓库
 git remote add origin git@github.com:Shelfcol/test3.git #添加远程仓库地址
+
+
 git remote -v #查看地址
 git add . #将当前修改添加至缓存区
 git commit -m '1' #提交
