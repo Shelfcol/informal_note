@@ -39,13 +39,13 @@
 %
 \title{BASD-SLAM: A Deep-Learning Visual SLAM System Based On Binary Adaptive-Scale descriptor}
 %
-\titlerunning{Hamiltonian Mechanics}  % abbreviated title (for running head)
+\titlerunning{Mechanical Engineerin}  % abbreviated title (for running head)
 %                                     also used for the TOC unless
 %                                     \toctitle is used
 %
 \author{XF Gu\inst{1} \and Yafei Wang\inst{2}}
 %
-\authorrunning{XF Gu et al.} % abbreviated author list (for running head)
+%\authorrunning{XF Gu et al.} % abbreviated author list (for running head)
 %
 %%%% list of authors for the TOC (use if author list has to be modified)
 \tocauthor{XF Gu}
@@ -239,66 +239,16 @@ UBC benchmark dataset, consisting of three datasets, Yosemite, Notredame and Lib
 
 
 \subsubsection{HPatches dataset}
-The HPatches dataset results is
+The HPatches benchmark dataset introduces a large-scale dataset of images annoted with homographies. It consists of three different tasks for visual analysis tasks,which are patch verification, patch matching and patch retrieval.So it is more suitable for realistic and reliable comparison in different visual analysis scenarios. We followed the protocal it provided to compare our learning descriptor with traditional descriptor,which are BRIEF, ORB and BinBoost.The result showed that our learning descriptor outperforms largely than traditional ones in this three tasks.
 
 \begin{figure}[h]
 \centering
 %三个结果应该上下排列
-\includegraphics[scale=0.25]{HPatches--orb_brief_binboost_BASD}
+\includegraphics[scale=0.33]{HPatches--orb_brief_binboost_BASD}
 \captionsetup{font={scriptsize}}
 \caption{The HPatches Results.} \scriptsize
 \end{figure}
 
-
-\subsubsection{Matching result in hard scenarios}
-The performance in dealing with hard scenarios like illumination change and view change is very important to SLAM. So we choose the hand-crafted descriptor, ORB, to make a comparison with our learned descriptor. Although we do RANSAC in SLAM system, the performance will be bad if the mismatch number exceeds the match number. We choose large illumination change and large view change pictures to evaluate descriptors. From the match results, our descriptor outperforms the ORB descriptor, which show the robustness of our descriptor.
-
-%\begin{figure}[htbp]
-%%\centering
-%
-%\subfigure[BASD]{
-%\begin{minipage}[t]{1\linewidth}
-%\centering
-%\includegraphics[scale=0.29]{BASD_match.png}
-%\end{minipage}
-%}
-%\subfigure[ORB]{
-%\begin{minipage}[t]{1\linewidth}
-%\centering
-%\includegraphics[scale=0.32]{ORB_match.png}
-%
-%\end{minipage}
-%}
-
-%\begin{figure}[htbp]
-%\centering
-%\begin{minipage}[t]{1\linewidth}
-%\centering
-%\includegraphics[scale=0.29]{BASD_match.png}
-%\label{fig_22}
-%\caption{BASD}
-%\end{minipage}%
-%\begin{minipage}[t]{1\linewidth}
-%\centering
-%\includegraphics[scale=0.32]{ORB_match.png}
-%\caption{ORB}
-%\label{fig_23}
-%\end{minipage}
-%\end{figure}
-
-\begin{figure} 
-\centering    
-\subfigure[BASD] {
- \label{fig:a}     
-\includegraphics[scale=0.45]{BASD_match.png}  
-}     
-\subfigure[ORB] { 
-\label{fig:b}     
-\includegraphics[scale=0.45]{ORB_match.png}     
-}      
-\caption{ general title. }     
-\label{fig}     
-\end{figure}
 
 \subsection{SLAM system evaluation}
 
