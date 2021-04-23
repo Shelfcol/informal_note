@@ -140,7 +140,7 @@ Compared with hand-crafted methods, learned descriptors has tremendous advantage
 	Loss function plays an important role in descriptor generation. We adopt four loss type to train our descriptor. We will describe in detail below.
 
 \subsubsection{Adaptive-Scale Triplet Loss} 
-Triplet loss has been proved to have great advantages in descriptor generation. So we also adopt this loss function. [ASD-SLAM] proposed the scale uncertainty influence in triplet loss, and modified the prime triplet loss function to reflect the changes of scale by adding a scale reminder factor. Given three image patches, Pa, Pb and Pc, which represent the anchor, positive and negative image patches. After the reasoning of network, we get descriptors xa, xb and xc respectively. And the adaptive-scale triplet loss function is defined as:
+Triplet loss has been proved to have great advantages in descriptor generation. So we also adopt this loss function.\cite{28} proposed the scale uncertainty influence in triplet loss, and modified the prime triplet loss function to reflect the changes of scale by adding a scale reminder factor. Given three image patches, Pa, Pb and Pc, which represent the anchor, positive and negative image patches. After the reasoning of network, we get descriptors xa, xb and xc respectively. And the adaptive-scale triplet loss function is defined as:
 
 \begin{equation}
 d _{+} = \| x_{a} - x_{p}  \| 
