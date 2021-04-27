@@ -116,8 +116,8 @@ To address the limitation of above researches, we propose our local feature desc
 
 In addition, our descriptor can also be extended to other similar fields like SFM. In summary, our main contributions are the following:
 \begin{itemize}
-\item We propose a binary descriptor with CNN model using four loss function, and outperforms other traditional descriptor on accuracy and effectiveness. 
-\item We design a monocular system with our learned descriptor, and achieve better results than other traditional visual SLAM system on several benchmark datasets.
+\item A binary descriptor of the CNN model using  four loss functions is proposed, and its accuracy and effectiveness are better than other traditional descriptors on UBC benchmark dataset and HPaatches dataset.
+\item A monocular system with our learned descriptor is designed meticulously, and achieves better results than other traditional visual SLAM system on Tartanair dataset.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,7 +163,7 @@ In our BASD-SLAM system, we still adopt traditional visual SLAM pipeline. ORB-SL
 \begin{figure}[h]
 \centering
 %三个结果应该上下排列
-\includegraphics[scale=0.36]{BASD_Net}
+\includegraphics[scale=0.26]{BASD_Net}
 \captionsetup{font={scriptsize}}
 \caption{ illustration of our learning binary local descriptor architecture.} \scriptsize
 \end{figure}
@@ -281,7 +281,7 @@ The HPatches benchmark dataset \cite{c30}introduces a large-scale dataset of ima
 \begin{figure}[h]
 \centering
 %三个结果应该上下排列
-\includegraphics[scale=0.33]{HPatches--orb_brief_binboost_BASD}
+\includegraphics[scale=0.25]{HPatches--orb_brief_binboost_BASD}
 \captionsetup{font={scriptsize}}
 \caption{The HPatches Results.} \scriptsize
 \end{figure}
