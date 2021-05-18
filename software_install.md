@@ -643,3 +643,15 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 
 ​       
 >>>>>>> faf225b023762212a50820bbedab76f84a118dff
+
+27.vscode常用插件
+1. ROS：在linux下安装该插件可以跳出ros里自带的消息等。
+2. Code Spell Checker：   检查拼写错误，对于我这种经常顺序拼反的人特别有用，但要注意命名规范。
+3. Bracket-pair colorizer2：  彩色括号以及配对
+4. better comment  有更多注释的功能包括， todo ! // //  ？
+5. TODO highlight  TODO:  与 FIXEME: 两个命名有深色块的功能。
+6. GitLens 增强自带Git功能 https://www.codenong.com/js95a1a06ac0fb/
+7. Darcula Theme 深色IDE主题，不实用
+8.[Markdown] 使用vscode开始Markdown写作之旅
+https://blog.csdn.net/aihe2639/article/details/101277623
+markdown math + markdwon preview enhanced + markdwon all in one
