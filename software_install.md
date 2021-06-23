@@ -655,3 +655,45 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 8.[Markdown] 使用vscode开始Markdown写作之旅
 https://blog.csdn.net/aihe2639/article/details/101277623
 markdown math + markdwon preview enhanced + markdwon all in one
+
+60.gcc 版本降级
+将gcc版本从7.3降级为5.5版本
+
+ 
+
+方法如下：
+
+ 
+
+首先查看自己的gcc版本，Ubuntu18.04上默认的是7.3版本
+
+>>gcc --version
+
+结果为：
+gcc (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+降级方法
+1. 下载gcc/g++ 5
+sudo apt-get install -y gcc-5
+sudo apt-get install -y g++-5
+
+
+2. 链接gcc/g++实现降级
+cd /usr/bin
+sudo rm gcc
+sudo ln -s gcc-5 gcc
+sudo rm g++
+sudo ln -s g++-5 g++
+
+确认版本降级成功
+
+再次查看gcc版本，可以看到已经降级.
+
+>>gcc --version
+gcc (Ubuntu 5.5.0-12ubuntu1) 5.5.0 20171010
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
