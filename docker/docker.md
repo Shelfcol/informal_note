@@ -1,37 +1,52 @@
-1.  在docker里面使用rviz
+1. docker里面使用rviz，并挂载本地文件夹： https://blog.csdn.net/weixin_39837709/article/details/109099684  
 
-   教程：https://medium.com/intro-to-artificial-intelligence/rviz-on-docker-bdf4d0fca5b
+   需要安装nvidia驱动
 
-   注意host的时候是 xhost +local:docker（注意加号前面的空格）
+   在docker-ce的基础上安装nvidia-docker2 ：https://blog.csdn.net/quantum7/article/details/86416600
 
-   运行的时候报：nvidia runtime错误
+   在docker_rviz文件下面打开终端运行 docker build -t  kinetic-desktop-full .   (kinetic-desktop-full是镜像名)
 
-   解决方法：在docker-ce的基础上安装nvidia-docker2 ：https://blog.csdn.net/quantum7/article/details/86416600
+   bash docker_run_image.sh构建一个容器，并挂载本地文件夹，同时会进入此容器。以后都不要再运行此sh，而是用docker start docker_rviz启动容器
 
-   在教程的最后一行docker run测试的时候nvidia/cuda需要加tag：docker run --runtime=nvidia --rm nvidia/cuda:11.4.0-runtime-ubuntu20.04 nvidia-smi
+   docker exec -it docker_rviz bash 进入容器（docker_rviz是docker_run_image.sh里面的容器名）
 
+   运行rviz的界面需要在进入docker容器之前运行 xhost +local:docker
 
+2. docker每次需要sudo情况解决
 
-​		只需要执行一次sudo bash run_ssh_rviz_c.bash ,后面执行rviz容器的时候只需要  xhost +local:docker ,  docker start rvizK, docker exec -it rviz bash
+   1. 创建docker用户组
 
-​		只需要执行一次bash run_ssh_roscore_c.bash创建新容器并进入，后面不能用docker run，而是docker start ros_melodic，docker exec -it ros_melodic
+   ```
+    sudo groupadd docker1
+   ```
 
-​		docker容器导出生成镜像： docker export -o 新镜像名.tar 容器名
+   2. 应用用户加入docker用户组
 
-​		docker导入镜像: docker import 新镜像名.tar 镜像名:tag
+   ```
+    sudo usermod -aG docker ${USER}1
+   ```
 
-​		docker run 
+   3. 重启docker服务
 
+   ```
+    sudo systemctl restart docker
+   ```
 
+   4.  切换或者退出当前账户再从新登入
 
-​	**成功：**
+   ```
+   su root             切换到root用户
+   su ${USER}          再切换到原来的应用用户以上配置才生效 或者su gxf
+   ```
 
-​	https://github.com/Shelfcol/car_demo 这个教程可以直接调出rviz和gazebo，
+3. docker命令整理： https://blog.csdn.net/qq_21197507/article/details/115071715?utm_source=app&app_version=4.12.0&code=app_1562916241&uLinkId=usr1mkqgl919blen
 
-​	安装xserver安装：sudo apt-get install xserver-xephyr
+   
 
-​	docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]
+      docker容器导出生成镜像： docker export -o 新镜像名.tar 容器名
 
-​	解决方法：systemctl restart docker
+   ​		docker导入镜像: docker import 新镜像名.tar 镜像名:tag
 
-2. 每次将docker_file下的文件放置到需要跟docker容器互通的文件夹，执行sh文件，即可构建镜像和容器，并能启动rviz。每次修改了代码之后就需要执行sh文件
+   ​		docker run 
+
+   
