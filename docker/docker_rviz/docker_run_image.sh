@@ -13,13 +13,16 @@ then
 fi
  
 docker run -it \
-    -v /home/gxf/project:/home/gxf/project \
+    -v /home/gxf/lvi_sam:/home/gxf/lvi_sam \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --env="XAUTHORITY=$XAUTH" \
     --volume="$XAUTH:$XAUTH" \
     --runtime=nvidia \
-    --name=docker_rviz \
+    --network host \
+    --privileged \
+    --security-opt seccomp=unconfined \
+    --name=lvi_sam \
     kinetic-desktop-full:latest \
     bash

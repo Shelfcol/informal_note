@@ -1,45 +1,61 @@
-1.印象笔记：
-	建议从Nixnote官网下最新的：https://sourceforge.net/projects/nevernote/，建议别用ppa的，这个好像会少拉一些包，而且没有图标。 安装中途会提示libtbb2和libcurl3，apt-get安装就行了 然后在'file文件'中建立账户,然后使用建立的账户，选择“印象笔记”（这个是国服），使用'工具'中的同步，这时会进入印象笔记大陆的服务器，如果选择的是印象笔记国际版，进入的就是国际版。两个域名是不一样的，在没登录前可以在~/.nixnote/accounts.conf中看到。登录页面左上角也不一样，国际版是Eventnote，国服是印象笔记。  在登录国服时候，输入完邮箱地址一直不会显示密码框，这个时候点击左上角的“印象笔记”链接，然后会打开网页版的印象笔记页面，在里面找到登录页面，正常登录。然后关闭登录框，再从'工具'中的同步进入，这个时候就会看到授权提示了。
+1. 印象笔记：
+    建议从Nixnote官网下最新的：https://sourceforge.net/projects/nevernote/，建议别用ppa的，这个好像会少拉一些包，而且没有图标。 安装中途会提示libtbb2和libcurl3，apt-get安装就行了 然后在'file文件'中建立账户,然后使用建立的账户，选择“印象笔记”（这个是国服），使用'工具'中的同步，这时会进入印象笔记大陆的服务器，如果选择的是印象笔记国际版，进入的就是国际版。两个域名是不一样的，在没登录前可以在~/.nixnote/accounts.conf中看到。登录页面左上角也不一样，国际版是Eventnote，国服是印象笔记。  在登录国服时候，输入完邮箱地址一直不会显示密码框，这个时候点击左上角的“印象笔记”链接，然后会打开网页版的印象笔记页面，在里面找到登录页面，正常登录。然后关闭登录框，再从'工具'中的同步进入，这个时候就会看到授权提示了。
 
-2.slam的评估轨迹的包：
-	https://github.com/uzh-rpg/rpg_trajectory_evaluation          				    rpg_trajectory_evaluation-master
-	https://github.com/catkin/catkin_simple  catkin_simple
-	将这两个包放在catkin_ws下面，然后catkin_make
+2. slam的评估轨迹的包：
+    https://github.com/uzh-rpg/rpg_trajectory_evaluation          				    r	    
+    pg_trajectory_evaluation-master
+    https://github.com/catkin/catkin_simple  catkin_simple
+    将这两个包放在catkin_ws下面，然后catkin_make
+    
+3. VTK+PCL:      
+    https://blog.csdn.net/sinat_28752257/article/details/79169647
+    https://blog.csdn.net/sinat_28752257/article/details/79169647
+    （但是我的新电脑直接可以用我的sh文件安装）
 
-3.VTK+PCL:      
-	https://blog.csdn.net/sinat_28752257/article/details/79169647
-	https://blog.csdn.net/sinat_28752257/article/details/79169647
-	（但是我的新电脑直接可以用我的sh文件安装）
+
+4. ros kinect:
+    https://blog.csdn.net/softimite_zifeng/article/details/78632211
+    sudo rosdep init: RROR:cannot download default sources list from
+    需要翻墙，利用lantern翻墙，每个月可以有500M的翻墙额度：
+    
+5. antern下载：https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-preview-64-bit.deb
+    lantern安装：
+    
+    ```
+    sudo dpkg -i lantern-installer-preview-64-bit.deb
+    apt-cache search libappindicator3-1
+    sudo apt-get install libappindicator3-1
+    然后在终端输入lantern即可启用，但要在右上角确认是否connected
+    然后再sudo rosdep init，再继续后面的操作。最好不要在ros安装一开始就启用lantern，因为其额度有限，最后在sudo rosdep init出错之后再启用
+    ```
+    
+    ​    
+
+6. U盘解锁方法：
+	```
+    df -h #查看信息，找到 /dev/sdb4       284G  217G   68G   77% /media/xxx/u盘名
+    sudo umount /media/xxx/u盘名 #卸载u盘（不需要拔掉u盘）（此步若不成功，可以直接做下一步）
+    sudo dosfsck -v -a /dev/sdb4 #文件修复
+	```
 	
-3.ros kinect:
-	https://blog.csdn.net/softimite_zifeng/article/details/78632211
-        sudo rosdep init: RROR:cannot download default sources list from
-        需要翻墙，利用lantern翻墙，每个月可以有500M的翻墙额度：
-        lantern下载：https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-preview-64-bit.deb
-        lantern安装：
-        	sudo dpkg -i lantern-installer-preview-64-bit.deb
-                apt-cache search libappindicator3-1
-                sudo apt-get install libappindicator3-1
-                然后在终端输入lantern即可启用，但要在右上角确认是否connected
-        然后再sudo rosdep init，再继续后面的操作。最好不要在ros安装一开始就启用lantern，因为其额度有限，最后在sudo rosdep init出错之后再启用
-        
-4.U盘解锁方法：
-	df -h #查看信息，找到 /dev/sdb4       284G  217G   68G   77% /media/xxx/u盘名
-	sudo umount /media/xxx/u盘名 #卸载u盘（不需要拔掉u盘）（此步若不成功，可以直接做下一步）
-	sudo dosfsck -v -a /dev/sdb4 #文件修复
+7. tensorflow 安装并在jupyter里面运行：
+   
+    安装anaconda3
+    安装tensorflow：https://www.cnblogs.com/guohaoblog/p/9319791.html（(tensorflow)D:\>ipython kernelspec install-self --user很重要）
+    要使用tensorflow，先进入tf虚拟环境：source activate tf，然后在里面输入jupyter notebook，进入jupyter。要退出tf虚拟环境：source deactivate tf
 
-5.tensorflow 安装并在jupyter里面运行：
-	安装anaconda3
-	安装tensorflow：https://www.cnblogs.com/guohaoblog/p/9319791.html（(tensorflow)D:\>ipython kernelspec install-self --user很重要）
-	要使用tensorflow，先进入tf虚拟环境：source activate tf，然后在里面输入jupyter notebook，进入jupyter。要退出tf虚拟环境：source deactivate tf
+8. sophus安装：
 
-5.sophus安装：
-	git clone http://github.com/strasdat/Sophus.git
-	git checkout a621ff  (!!!!!!!!!!!!!!!!!!!very important)
-	mkdir build
-	cd build
-	cmake ..
-	make
+    ```
+    git clone http://github.com/strasdat/Sophus.git
+    git checkout a621ff  (!!!!!!!!!!!!!!!!!!!very important)
+    mkdir build
+    cd build
+    cmake ..
+    make
+    ```
+    
+    
 
 6.sophus使用问题：
 	CMakeFiles/run_vo.dir/run_vo.cpp.o：在函数‘main’中：
@@ -427,19 +443,19 @@ cd /home/gxf/software/pytorch && /usr/bin/python3 tools/setup_helpers/generate_c
 ​		#建立指向Python3.X的连接
 ​		sudo ln -s /usr/bin/python3.5 /usr/bin/python
 ​	
-		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
-		PATH=/usr/bin:$PATH
-	
-		#验证，命令行输入python，就会输出新的版本。
-		python
-	
-			python3.X还原为python2.X
-	
-		#删除原有的Python连接文件
-		sudo rm /usr/bin/python
-	
-		#建立指向Python2.X的连接
-		sudo ln -s /usr/bin/python2.7 /usr/bin/python
+​		#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）
+​		PATH=/usr/bin:$PATH
+​	
+​		#验证，命令行输入python，就会输出新的版本。
+​		python
+​	
+​			python3.X还原为python2.X
+​	
+​		#删除原有的Python连接文件
+​		sudo rm /usr/bin/python
+​	
+​		#建立指向Python2.X的连接
+​		sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
 
 ​		
@@ -554,6 +570,7 @@ https://blog.csdn.net/mrh1714348719/article/details/103803110
 =======
 
 56.源码阅读软件understand安装：https://m.jb51.net/softs/633733.html
+
 >>>>>>> 18eb97673cb1f804b44277608cc01042aa8b2119
 
 57.google浏览器屏蔽特定网站：https://blog.csdn.net/oLevin/article/details/50352485
@@ -697,3 +714,11 @@ gcc (Ubuntu 5.5.0-12ubuntu1) 5.5.0 20171010
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions. There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+61. GTSAM安装 : cmake -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DCMAKE_BUILD_TYPE=Release -DGTSAM_USE_SYSTEM_EIGEN=ON ..
+
+    可以解决:error: static assertion failed: Error: GTSAM was built against a different version of Eigen static_assert(
+    
+62. catkin: command not found: apt install python3-catkin-pkg python3-catkin-tools python3-osrf-pycommon
+
+63. roscpp tf not found : apt install ros-kinetic-roscpp
