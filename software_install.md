@@ -131,14 +131,16 @@
 	 
 13.imu使用:
 	https://blog.csdn.net/qq_31356389/article/details/79216765
-        sudo apt-get install ros-kinetic-xsens-driver
-        rosstack profile
-        rospack profile
-	sudo chmod 777 /dev/ttyUSB*#赋予权限，使用前必备操作
-	roslaunch xsens_driver xsens_driver.launch
-	rostopic list
-	rostopic echo /imu/data
-	
+    https://wenku.baidu.com/view/042f2a06cc175527072208d6.html        
+
+​    sudo apt-get install ros-kinetic-xsens-driver
+​        rosstack profile
+​        rospack profile
+​	sudo chmod 777 /dev/ttyUSB*#赋予权限，使用前必备操作
+​	roslaunch xsens_driver xsens_driver.launch
+​	rostopic list
+​	rostopic echo /imu/data
+​	
 
 	如果要修改imu的frame_id，则需要下载驱动包进行安装，再修改launch文件
 	安装好后的使用：
@@ -722,3 +724,5 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 62. catkin: command not found: apt install python3-catkin-pkg python3-catkin-tools python3-osrf-pycommon
 
 63. roscpp tf not found : apt install ros-kinetic-roscpp
+
+64. Mako摄像头使用： https://www.alliedvision.com/en/support/technical-documentation/mako-g-documentation/

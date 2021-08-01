@@ -13,7 +13,7 @@ then
 fi
  
 docker run -it \
-    -v /home/gxf/lvi_sam:/home/gxf/lvi_sam \
+    -v /home/gxf/data_collection:/home/gxf/data_collection \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
@@ -23,6 +23,6 @@ docker run -it \
     --network host \
     --privileged \
     --security-opt seccomp=unconfined \
-    --name=lvi_sam \
+    --name=data_collection \
     kinetic-desktop-full:latest \
     bash
