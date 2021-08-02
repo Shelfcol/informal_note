@@ -721,8 +721,12 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     可以解决:error: static assertion failed: Error: GTSAM was built against a different version of Eigen static_assert(
     
+    roslaunch error : mv /usr/local/lib/libmetis.so /opt/ros/kinetic/lib/ 然后重启终端 
+    
 62. catkin: command not found: apt install python3-catkin-pkg python3-catkin-tools python3-osrf-pycommon
 
 63. roscpp tf not found : apt install ros-kinetic-roscpp
 
 64. Mako摄像头使用： https://www.alliedvision.com/en/support/technical-documentation/mako-g-documentation/
+
+65. velodyne16的网关配置： 地址：169.254.100.10   ，子网掩码 24， 网关：169.254.100.1

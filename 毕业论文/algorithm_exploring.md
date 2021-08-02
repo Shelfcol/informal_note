@@ -89,3 +89,4 @@ extrinsicRot的值根据下图可知，beta=180度，其余两个角为0度，�
 
  OS1激光雷达坐标系不符合REP规则，所以需要修改 https://github.com/TixiaoShan/LIO-SAM/issues/94
 
+7. ouster和MTi sync without GPS ：https://github.com/TixiaoShan/LIO-SAM/issues/111 
