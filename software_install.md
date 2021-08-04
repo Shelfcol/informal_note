@@ -730,3 +730,5 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 64. Mako摄像头使用： https://www.alliedvision.com/en/support/technical-documentation/mako-g-documentation/
 
 65. velodyne16的网关配置： 地址：169.254.100.10   ，子网掩码 24， 网关：169.254.100.1
+
+66.  ceres-solver 安装： Eigen3 not found by cmake  ：https://github.com/ceres-solver/ceres-solver/issues/541
