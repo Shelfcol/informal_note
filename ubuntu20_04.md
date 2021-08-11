@@ -10,18 +10,17 @@
 
    https://blog.csdn.net/Iamsonice/article/details/116018915?utm_source=app&app_version=4.12.0&code=app_1562916241&uLinkId=usr1mkqgl919blen
 
-   
-
    1. git clone https://github.com/ros/rosdistro.git
 
-   2. 修改文件：/usr/lib/python3/dist-packages/rosdep2/rep3.py 
+   2. 修改文件：/usr/lib/python2.7/dist-packages/rosdep2/rep3.py 
 
       ​					/etc/ros/rosdep/sources.list.d/20-default.list
 
-      ​					/usr/lib/python3/dist-packages/rosdistro/\__init__.py
+      ​					/usr/lib/python3/dist-packages/rosdistro/\__init__.py  (/usr/lib/python2.7/dist-packages/rosdistro/__init__.py)
 
       ​				将里面的https://raw.github,com ...改为本地地址 file:///home/gxf/...
 
 6. ubuntu配置外网：https://rumosky.com/archives/217
 
    
+

@@ -732,3 +732,15 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 65. velodyne16的网关配置： 地址：169.254.100.10   ，子网掩码 24， 网关：169.254.100.1
 
 66.  ceres-solver 安装： Eigen3 not found by cmake  ：https://github.com/ceres-solver/ceres-solver/issues/541
+
+67. g2o安装：https://github.com/RainerKuemmerle/g2o/releases/tag/20170730_git
+
+    g2o使用时 undefined reference to ...
+
+    \# SET(G2O_LIBS g2o_cli g2o_ext_freeglut_minimal g2o_simulator g2o_solver_slam2d_linear g2o_types_icp g2o_types_slam2d g2o_core g2o_interface g2o_solver_csparse g2o_solver_structure_only g2o_types_sba g2o_types_slam3d g2o_csparse_extension g2o_opengl_helper g2o_solver_dense g2o_stuff g2o_types_sclam2d g2o_viewer g2o_ext_csparse g2o_parser g2o_solver_pcg g2o_types_data g2o_types_sim3 cxsparse )
+
+    rosbuild_add_executable(g2o_mvm src/g2o_mvm.cpp) 
+
+    target_link_libraries(g2o_mvm ${G2O_LIBS})
+
+    core dump : set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -march=native")

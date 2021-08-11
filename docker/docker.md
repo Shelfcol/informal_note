@@ -49,4 +49,7 @@
 
    ​		docker run 
 
-   
+4. docker消失
+
+      sudo vim /etc/docker/daemon.json  （添加docker路径，已经添加过了）
+      sudo systemctl daemon-reload && systemctl restart docker
