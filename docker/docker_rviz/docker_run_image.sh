@@ -13,7 +13,7 @@ then
 fi
  
 docker run -it \
-    -v /home/gxf/lio_sam:/home/gxf/lio_sam \
+    -v /home/gxf/barn_test:/home/gxf/barn_test \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
@@ -22,7 +22,8 @@ docker run -it \
     --runtime=nvidia \
     --network host \
     --privileged \
+    --device=/dev/ttyUSB0 \
     --security-opt seccomp=unconfined \
-    --name=lio_sam \
-    kinetic-desktop-full:latest \
+    --name=barn_test \
+    kinetic-paper:v01 \
     bash

@@ -60,6 +60,8 @@ SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 2.在launch文件里面的node加入
     launch-prefix="xterm -e gdb -ex run --args "
+    或者 <node pkg="lidar_localization"  type="front_end_node"  name="front_end_node"  output="screen" launch-prefix="gnome-terminal -x gdb -ex run --args "></node>
+
 执行roslaunch的时候就会直接弹出gdb的窗口
 ```
 

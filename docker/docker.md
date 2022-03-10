@@ -43,9 +43,9 @@
 
    
 
-      docker容器导出生成镜像： docker export -o 新镜像名.tar 容器名
+      docker容器导出生成镜像： docker export -o 新镜像名.tar （只是一个文件名字）容器名
 
-   ​		docker导入镜像: docker import 新镜像名.tar 镜像名:tag
+   ​		docker导入镜像: docker import 新镜像名.tar 镜像名:tag（这个才是真正新的镜像名字）
 
    ​		docker run 
 
